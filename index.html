@@ -1,133 +1,80 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="کاکوشا کمپ | تجربه‌ای متفاوت از دورهمی، کمپ شبانه و ماجراجویی در طبیعت">
-  <title>کاکوشا | کمپ و دورهمی</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کاکوشا | کمپ و دورهمی</title>
+    <!-- لود فونت وزیرمتن -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap" rel="stylesheet">
+    <!-- اتصال به فایل CSS که کنار همین فایل است -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ============ HEADER ============ -->
-  <header class="site-header">
-    <a class="logo" href="#home">kakosha <span>kamp</span></a>
-    <button class="menu-toggle" aria-label="باز کردن منو" aria-expanded="false">☰</button>
-    <nav class="main-nav" aria-label="منوی اصلی">
-      <a href="#home">خانه</a>
-      <a href="#about">درباره ما</a>
-      <a href="#activities">سفرها</a>
-      <a href="#gallery">گالری</a>
-      <a href="#contact">تماس با ما</a>
-    </nav>
-  </header>
+    <!-- هدر سایت -->
+    <header class="site-header">
+        <!-- لوگو: عکسی که با نام logo.png آپلود می‌کنی -->
+        <a href="#" class="logo">
+            <img src="logo.png" alt="لوگوی کاکوشا" onerror="this.style.display='none'">
+        </a>
+        
+        <!-- منوی ساده -->
+        <nav class="nav-menu">
+            <a href="#home">خانه</a>
+            <a href="#about">درباره ما</a>
+            <a href="#gallery">گالری</a>
+            <a href="#contact">تماس با ما</a>
+        </nav>
+    </header>
 
-  <main>
-    <!-- ============ HERO ============ -->
-    <section class="hero" id="home">
-      <div class="hero-content">
-        <p class="date">۳۰ مهر</p>
-        <p class="kicker">اولین کمپ پاییزه</p>
-        <h1>در خدمتتون هستیم</h1>
-        <p class="hero-desc">لحظاتی دور از روزمرگی، کنار آتش، زیر آسمان پرستاره و در کنار آدم‌هایی که دوستشون دارید.</p>
-        <div class="buttons">
-          <a class="btn orange" href="#contact">ثبت نام</a>
-          <a class="btn green" href="#activities">کمپ‌های شبانه</a>
-        </div>
-      </div>
-    </section>
+    <main>
+        <!-- بخش هدر اصلی (Hero) -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <p class="date">۳۰ مهر</p>
+                <h1>در خدمتتون هستیم</h1>
+                <p>لحظاتی دور از روزمرگی، کنار آتش و زیر آسمان پرستاره.</p>
+                <a href="#contact" class="btn">ثبت نام</a>
+            </div>
+        </section>
 
-    <!-- ============ STATS ============ -->
-    <section class="stats" aria-label="آمار مجموعه">
-      <div class="stat"><strong>+۵۰۰</strong><span>خاطره ساخته‌شده</span></div>
-      <div class="stat"><strong>+۲۰</strong><span>کمپ برگزارشده</span></div>
-      <div class="stat"><strong>+۱۰</strong><span>مقصد طبیعی</span></div>
-      <div class="stat"><strong>۹۸٪</strong><span>رضایت مهمانان</span></div>
-    </section>
+        <!-- بخش درباره ما -->
+        <section class="about" id="about">
+            <div class="about-text">
+                <h2>مناسب تمامی سنین</h2>
+                <p>اگر به دنبال مکانی برای دور شدن از شلوغی‌های روزمره و لذت بردن از طبیعت هستید، کمپ کاکوشا انتخابی جذاب برای شماست. ما فضایی امن و صمیمی برای استراحت و تفریح شما فراهم کرده‌ایم.</p>
+            </div>
+            <div class="about-image">
+                <!-- عکس درباره ما: about.jpg -->
+                <img src="about.jpg" alt="دورهمی دوستان">
+            </div>
+        </section>
 
-    <!-- ============ ABOUT ============ -->
-    <section class="intro" id="about">
-      <div class="photo">
-        <img src="assets/images/about.jpg" alt="دوستان در یک دورهمی صمیمی">
-      </div>
-      <div class="copy">
-        <p class="eyebrow">فضایی امن و دوستانه</p>
-        <h2>مناسب تمامی سنین</h2>
-        <p>اگر به دنبال مکانی برای دور شدن از شلوغی‌های روزمره، لذت بردن از طبیعت و ساختن خاطراتی فراموش‌نشدنی هستید، کمپ کاکوشا می‌تواند انتخابی جذاب برای شما باشد.</p>
-        <p>در کمپ کاکوشا فضایی برای استراحت، تفریح و گذراندن لحظاتی دل‌نشین در کنار دوستان و خانواده فراهم می‌شود. ما تلاش می‌کنیم محیطی صمیمی و خاطره‌انگیز برای افرادی ایجاد کنیم که به ماجراجویی و تجربه‌های جدید علاقه دارند.</p>
-        <a class="btn green" href="#contact">توضیحات بیشتر</a>
-      </div>
-    </section>
+        <!-- بخش گالری -->
+        <section class="gallery-section" id="gallery">
+            <h2>گالری دورهمی‌ها</h2>
+            <div class="gallery-grid">
+                <!-- عکس‌های گالری: g-1.jpg تا g-6.jpg (می‌تونی بیشتر هم بذاری) -->
+                <img src="g-1.jpg" alt="گالری ۱">
+                <img src="g-2.jpg" alt="گالری ۲">
+                <img src="g-3.jpg" alt="گالری ۳">
+                <img src="g-4.jpg" alt="گالری ۴">
+                <img src="g-5.jpg" alt="گالری ۵">
+                <img src="g-6.jpg" alt="گالری ۶">
+            </div>
+        </section>
 
-    <!-- ============ ACTIVITIES ============ -->
-    <section class="activities" id="activities">
-      <div class="section-title">
-        <p class="eyebrow">تجربه‌های کاکوشا</p>
-        <h2>برای هر دورهمی، یک خاطره تازه</h2>
-        <p>برای جزئیات برنامه‌ها با مجموعه هماهنگ کنید.</p>
-      </div>
-      <div class="cards">
-        <article class="card">
-          <div class="icon">✦</div>
-          <h3>کمپ شبانه</h3>
-          <p>یک تجربه متفاوت در فضای باز و کنار دوستان؛ جزئیات برگزاری را از مجموعه بپرسید.</p>
-        </article>
-        <article class="card">
-          <div class="icon">♡</div>
-          <h3>دورهمی دوستانه</h3>
-          <p>زمانی برای گفت‌وگو، بازی و ساختن خاطره‌های خوب در کنار یکدیگر.</p>
-        </article>
-        <article class="card">
-          <div class="icon">♧</div>
-          <h3>برنامه گروهی</h3>
-          <p>برای هماهنگی دورهمی‌های گروهی و برنامه‌های ویژه با ما در ارتباط باشید.</p>
-        </article>
-      </div>
-    </section>
+        <!-- بخش تماس -->
+        <section class="contact" id="contact">
+            <h2>آماده‌ای خاطره بعدی رو بسازی؟</h2>
+            <p>برای اطلاع از زمان برنامه‌ها با ما در ارتباط باش.</p>
+            <a href="mailto:hello@example.com" class="btn">تماس با ما</a>
+        </section>
+    </main>
 
-    <!-- ============ GALLERY ============ -->
-    <section class="gallery-section" id="gallery">
-      <div class="section-title">
-        <h2>گالری دورهمی‌ها</h2>
-        <p>لحظه‌های شاد، خاطره‌های ماندگار</p>
-      </div>
-      <div class="gallery">
-        <img loading="lazy" src="assets/images/gallery-1.jpg"  alt="دورهمی دوستان">
-        <img loading="lazy" src="assets/images/gallery-2.jpg"  alt="دوستان در کنار هم">
-        <img loading="lazy" src="assets/images/gallery-3.jpg"  alt="خاطرات گروهی">
-        <img loading="lazy" src="assets/images/gallery-4.jpg"  alt="چادر کمپ">
-        <img loading="lazy" src="assets/images/gallery-5.jpg"  alt="کمپ در طبیعت">
-        <img loading="lazy" src="assets/images/gallery-6.jpg"  alt="طبیعت">
-        <img loading="lazy" src="assets/images/gallery-7.jpg"  alt="فعالیت گروهی">
-        <img loading="lazy" src="assets/images/gallery-8.jpg"  alt="خانواده">
-        <img loading="lazy" src="assets/images/gallery-9.jpg"  alt="طبیعت زیبا">
-        <img loading="lazy" src="assets/images/gallery-10.jpg" alt="فضای باز">
-      </div>
-    </section>
+    <footer>
+        <p>© کاکوشا کمپ — تمامی حقوق محفوظ است.</p>
+    </footer>
 
-    <!-- ============ CONTACT ============ -->
-    <section class="contact" id="contact">
-      <p class="eyebrow">با کاکوشا در ارتباط باش</p>
-      <h2>آماده‌ای خاطره بعدی رو بسازی؟</h2>
-      <p>برای اطلاع از زمان برنامه‌ها و شرایط شرکت، با مجموعه ارتباط بگیر.</p>
-      <a class="btn orange" href="mailto:hello@example.com">تماس با ما</a>
-    </section>
-  </main>
-
-  <!-- ============ FOOTER ============ -->
-  <footer>
-    <p>© کاکوشا کمپ — تمامی حقوق محفوظ است.</p>
-    <p>کنار هم، دور از روزمرگی 🌿</p>
-  </footer>
-
-  <!-- ============ FLOATING WHATSAPP ============ -->
-  <a class="whatsapp" href="https://wa.me/989xxxxxxxxx" target="_blank" rel="noopener" aria-label="واتساپ">
-    <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.4 5L2 22l5.2-1.4c1.4.8 3.1 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm5.3 14.3c-.2.6-1.2 1.2-1.7 1.3-.4.1-1 .2-2.9-.6-2.4-1-3.9-3.4-4-3.6-.1-.2-1-1.3-1-2.5 0-1.2.6-1.8.8-2 .2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.7.8 1.8.1.2.1.3 0 .5-.1.2-.1.3-.3.5l-.4.5c-.1.2-.3.3-.1.6.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5 0 .1-.1.6-.7.7-.9.2-.2.3-.2.6-.1.2.1 1.5.7 1.7.8.3.1.4.2.5.3.1.2.1.9-.1 1.4z"/></svg>
-  </a>
-
-  <script src="js/script.js"></script>
 </body>
 </html>
