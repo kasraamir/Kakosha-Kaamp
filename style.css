@@ -129,29 +129,35 @@ img { display: block; max-width: 100%; }
 }
 
 /* =========================================
-   7. بخش دکمه‌های هدایت به نظرات
+   7. بخش دکمه‌های هدایت به نظرات (کادر شیشه‌ای)
    ========================================= */
 .reviews-action-section {
     padding: 80px 5%; background-color: var(--bg-color);
     text-align: center; width: 100%;
 }
 .section-header h2 { font-size: 36px; margin-bottom: 10px; }
-.section-header .subtitle { color: var(--text-muted); font-size: 15px; margin-bottom: 30px; }
-.review-actions { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-.outline-btn { background-color: transparent; border: 1px solid var(--orange); }
-.outline-btn:hover { background-color: var(--orange); }
+.section-header .subtitle { color: var(--text-muted); font-size: 15px; margin-bottom: 40px; }
+
+.review-action-card {
+    display: flex; gap: 15px; justify-content: center; align-items: center;
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 25px; border-radius: 15px; max-width: 600px; margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3); backdrop-filter: blur(10px);
+}
+
+.review-action-card .btn { flex: 1; padding: 15px 20px; border-radius: 10px; font-size: 16px; }
+
+.glass-btn { background-color: transparent; border: 1px solid var(--orange); color: var(--orange); }
+.glass-btn:hover { background-color: var(--orange); color: #fff; }
 
 /* =========================================
    8. استایل صفحات جدید (نظرات و نظرسنجی)
    ========================================= */
 .page-container {
-    padding: 80px 5%;
-    min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 80px 5%; min-height: 80vh;
+    display: flex; flex-direction: column; align-items: center;
 }
-.page-title { text-align: center; margin-bottom: 50px; }
+.page-title { text-align: center; margin-bottom: 30px; }
 .page-title h1 { font-size: 40px; color: var(--orange); margin-bottom: 10px; }
 .page-title p { color: var(--text-muted); font-size: 16px; }
 
@@ -174,44 +180,59 @@ img { display: block; max-width: 100%; }
 .reviewer-info strong { display: block; color: var(--orange); font-size: 16px; margin-bottom: 5px; }
 .reviewer-info span { font-size: 12px; color: var(--text-muted); }
 
-/* فرم نظرسنجی */
+/* =========================================
+   فرم نظرسنجی (طراحی شیشه‌ای و مدرن)
+   ========================================= */
 .survey-form-wrapper {
-    background-color: rgba(2, 26, 18, 0.6); border: 1px solid #ffffff1a;
-    padding: 40px; border-radius: 15px; width: 100%; max-width: 600px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    background: rgba(2, 26, 18, 0.7); border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px); padding: 45px 35px; border-radius: 20px;
+    width: 100%; max-width: 600px; box-shadow: 0 25px 50px rgba(0,0,0,0.6);
 }
+
 .form-group { margin-bottom: 20px; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+/* فیکس کردن رنگ سفید زشت اینپوت‌ها */
 .form-group input, .form-group textarea {
-    width: 100%; padding: 15px; background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid #ffffff1a; border-radius: 8px; color: white;
+    width: 100%; padding: 15px 18px; 
+    background-color: rgba(0, 0, 0, 0.4) !important; /* رنگ تیره */
+    border: 1px solid rgba(255, 255, 255, 0.15); 
+    border-radius: 10px; color: #fff;
     font-family: inherit; font-size: 15px; transition: 0.3s;
 }
+
+.form-group input::placeholder, .form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
 .form-group input:focus, .form-group textarea:focus {
-    outline: none; border-color: var(--orange); background-color: rgba(255, 255, 255, 0.1);
+    outline: none; border-color: var(--orange); 
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    box-shadow: 0 0 10px rgba(255, 107, 0, 0.2);
 }
 .form-group textarea { resize: vertical; min-height: 120px; }
-.submit-btn { width: 100%; margin-top: 10px; font-size: 16px; padding: 15px; }
-.success-message { text-align: center; padding: 20px; }
-.success-message p:first-child { font-size: 20px; color: #4caf50; font-weight: bold; margin-bottom: 10px; }
 
-/* استایل ستاره‌های امتیازدهی (فیکس شده) */
+.submit-btn { width: 100%; margin-top: 10px; font-size: 16px; padding: 15px; border-radius: 10px; }
+.success-message { text-align: center; padding: 30px 10px; }
+.success-message p:first-child { font-size: 22px; color: #4caf50; font-weight: bold; margin-bottom: 10px; }
+
+/* استایل ستاره‌های امتیازدهی */
 .star-rating { 
     display: flex; 
     flex-direction: row-reverse; 
     justify-content: flex-end; 
-    gap: 5px; 
+    gap: 8px; 
 }
 .star-rating input { display: none; }
 .star-rating label {
-    font-size: 35px; color: #555; cursor: pointer; transition: 0.2s;
+    font-size: 38px; color: #444; cursor: pointer; transition: 0.2s;
     line-height: 1;
 }
 .star-rating input:checked ~ label, 
 .star-rating label:hover, 
 .star-rating label:hover ~ label {
     color: var(--orange); 
-    text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+    text-shadow: 0 0 15px rgba(255, 107, 0, 0.6);
 }
 
 /* =========================================
@@ -342,6 +363,16 @@ footer {
     .stats-section { margin-top: 30px; padding: 0 5%; }
     .stats-container { flex-direction: column; gap: 20px; padding: 25px 20px; }
 
+    /* فیکس دکمه‌های نظرات در موبایل */
+    .review-action-card { flex-direction: column; width: 100%; padding: 20px; }
+    .review-action-card .btn { width: 100%; }
+
+    /* فیکس فرم در موبایل */
+    .survey-form-wrapper { padding: 30px 20px; }
+    .form-row { grid-template-columns: 1fr; gap: 0; }
+    .star-rating label { font-size: 32px; }
+    .star-rating { justify-content: center; }
+
     .ticket { flex-direction: column; max-width: 100%; }
     .ticket::before, .ticket::after { display: none; }
     .ticket-main { padding: 20px; }
@@ -353,9 +384,4 @@ footer {
     .ticket-stub-content { flex-direction: row; justify-content: center; align-items: center; gap: 20px; }
     .ticket-btn { width: auto; padding: 10px 20px; }
     .ticket-type { font-size: 11px; }
-
-    /* فرم نظرسنجی در موبایل */
-    .survey-form-wrapper { padding: 25px 20px; }
-    .form-row { grid-template-columns: 1fr; gap: 0; }
-    .star-rating label { font-size: 30px; }
 }
