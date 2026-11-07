@@ -65,20 +65,20 @@
                     <div class="form-group">
                         <label style="color: var(--text-main); font-size: 15px; display: block; margin-bottom: 10px;">امتیاز شما به کمپ:</label>
                         <div class="star-rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5">★</label>
+                            <input type="radio" id="star5" name="rating" value="5" required /><label for="star5">★</label>
                             <input type="radio" id="star4" name="rating" value="4" /><label for="star4">★</label>
                             <input type="radio" id="star3" name="rating" value="3" /><label for="star3">★</label>
                             <input type="radio" id="star2" name="rating" value="2" /><label for="star2">★</label>
                             <input type="radio" id="star1" name="rating" value="1" /><label for="star1">★</label>
                         </div>
                     </div>
-                    <button type="submit" class="btn submit-btn">تایید و ثبت نظر</button>
+                    <button type="submit" id="submitBtn" class="btn submit-btn">تایید و ثبت نظر</button>
                 </form>
 
                 <div id="successMessage" class="success-message" style="display: none;">
                     <p>✅ نظر شما با موفقیت ثبت شد!</p>
-                    <p style="font-size: 14px; margin-top: 10px; color: var(--text-muted);">پس از تایید مدیر، نظر شما در سایت نمایش داده می‌شود.</p>
-                    <a href="./" class="btn" style="margin-top: 20px; background-color: var(--dark-green); border: 1px solid var(--orange);">بازگشت به صفحه اصلی</a>
+                    <p style="font-size: 14px; margin-top: 10px; color: var(--text-muted);">نظر شما هم به تلگرام مدیر ارسال شد و هم در صفحه نظرات ثبت گردید.</p>
+                    <a href="reviews.html" class="btn" style="margin-top: 20px; background-color: var(--dark-green); border: 1px solid var(--orange);">مشاهده صفحه نظرات</a>
                 </div>
             </div>
         </section>
@@ -88,14 +88,110 @@
         <p>© کاکوشا کمپ — تمامی حقوق محفوظ است.</p>
     </footer>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 800, once: true });
-        
-        function submitSurvey(event) {
+        async function submitSurvey(event) {
             event.preventDefault(); 
-            document.getElementById("surveyForm").style.display = "none";
-            document.getElementById("successMessage").style.display = "block";
+            
+            // 🔑 توکن‌های اتصال
+            const botToken = '9113954345:AAE7ow1chj40613u3zr1wgW1k_UZ1W0z_fQ'; // توکن ربات تلگرام
+            const chatId = '8258821743'; // آیدی عددی شما
+            const githubToken = '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'; // توکن گیت‌هاب شما
+            const repoOwner = 'kasraamir'; 
+            const repoName = 'Kakosha-Kaamp'; 
+
+            // گرفتن مقادیر فرم
+            const phone = document.getElementById('phone').value;
+            const fname = document.getElementById('fname').value;
+            const lname = document.getElementById('lname').value;
+            const review = document.getElementById('review').value;
+            
+            let rating = "5";
+            let starsHTML = "★★★★★";
+            const ratingInput = document.querySelector('input[name="rating"]:checked');
+            if (ratingInput) {
+                rating = ratingInput.value;
+                starsHTML = "★".repeat(rating) + "☆".repeat(5 - rating);
+            }
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.innerText = "در حال ارسال...";
+            submitBtn.disabled = true;
+
+            // ۱. ارسال به تلگرام
+            const messageText = `
+🌟 **نظرسنجی جدید برای کاکوشا** 🌟
+
+👤 **نام:** ${fname} ${lname}
+📞 **شماره تماس:** ${phone}
+⭐ **امتیاز:** ${rating} ستاره
+📝 **نظر:** 
+${review}
+            `;
+
+            try {
+                await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: chatId, text: messageText, parse_mode: 'Markdown' })
+                });
+            } catch (e) {
+                console.error("Telegram Error", e);
+            }
+
+            // ۲. ذخیره در گیت‌هاب (اضافه کردن به reviews.html)
+            try {
+                // گرفتن محتوای فعلی فایل reviews.html از گیت‌هاب
+                const getFileRes = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/reviews.html`, {
+                    headers: { 'Authorization': `token ${githubToken}` }
+                });
+                const fileData = await getFileRes.json();
+                
+                // دیکد کردن محتوای فایل (Base64 به متن)
+                const content = decodeURIComponent(escape(atob(fileData.content))); 
+                const fileSha = fileData.sha; 
+
+                // کارت HTML جدیدی که باید به صفحه اضافه بشه
+                const newReviewHTML = `
+                <div class="testimonial-card">
+                    <div class="stars">${starsHTML}</div>
+                    <p class="review-text">"${review}"</p>
+                    <div class="reviewer-info">
+                        <strong>${fname} ${lname}</strong>
+                        <span>تازه ثبت شده</span>
+                    </div>
+                </div>
+                <!-- INSERT_POINT -->`;
+
+                // اضافه کردن کارت جدید به کدهای صفحه
+                const updatedContent = content.replace('<!-- INSERT_POINT -->', newReviewHTML);
+
+                // انکد کردن مجدد برای ارسال به گیت‌هاب
+                const encodedContent = btoa(unescape(encodeURIComponent(updatedContent)));
+
+                // ارسال فایل آپدیت شده به گیت‌هاب
+                await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/reviews.html`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${githubToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: `New review from ${fname} ${lname}`,
+                        content: encodedContent,
+                        sha: fileSha
+                    })
+                });
+
+                // اگر همه چیز موفق بود
+                document.getElementById("surveyForm").style.display = "none";
+                document.getElementById("successMessage").style.display = "block";
+
+            } catch (error) {
+                console.error("GitHub Error", error);
+                alert("خطا در ثبت نظر در سایت. لطفا کنسول مرورگر را بررسی کنید.");
+                submitBtn.innerText = "تایید و ثبت نظر";
+                submitBtn.disabled = false;
+            }
         }
     </script>
 </body>
