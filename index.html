@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>کاکوشا | کمپ و دورهمی</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <!-- لود کردن کتابخانه انیمیشن AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -51,19 +55,35 @@
             </div>
         </section>
 
+        <!-- بخش جدید: آمار و ارقام -->
+        <section class="stats-section">
+            <div class="stat-box" data-aos="zoom-in" data-aos-delay="100">
+                <h3>+۵۰۰</h3>
+                <p>مسافر خوشحال</p>
+            </div>
+            <div class="stat-box" data-aos="zoom-in" data-aos-delay="200">
+                <h3>+۲۰</h3>
+                <p>کمپ برگزار شده</p>
+            </div>
+            <div class="stat-box" data-aos="zoom-in" data-aos-delay="300">
+                <h3>۹۸٪</h3>
+                <p>رضایت شرکت‌کنندگان</p>
+            </div>
+        </section>
+
         <section class="about" id="about">
-            <div class="about-text">
+            <div class="about-text" data-aos="fade-left">
                 <h2>مناسب تمامی سنین</h2>
                 <p>اگر به دنبال مکانی برای دور شدن از شلوغی‌های روزمره و لذت بردن از طبیعت هستید، کمپ کاکوشا انتخابی جذاب برای شماست. ما فضایی امن و صمیمی برای استراحت و تفریح شما فراهم کرده‌ایم.</p>
             </div>
-            <div class="about-image">
+            <div class="about-image" data-aos="fade-right">
                 <img src="about.jpg" alt="دورهمی دوستان">
             </div>
         </section>
 
         <section class="gallery-section" id="gallery">
-            <h2>گالری دورهمی‌ها</h2>
-            <div class="gallery-grid">
+            <h2 data-aos="fade-up">گالری دورهمی‌ها</h2>
+            <div class="gallery-grid" data-aos="fade-up" data-aos-delay="200">
                 <img src="g-1.jpg" alt="گالری ۱" class="gallery-img">
                 <img src="g-2.jpg" alt="گالری ۲" class="gallery-img">
                 <img src="g-3.jpg" alt="گالری ۳" class="gallery-img">
@@ -76,17 +96,19 @@
         </section>
 
         <section class="contact" id="contact">
-            <h2>آماده‌ای خاطره بعدی رو بسازی؟</h2>
-            <p>برای اطلاع از زمان برنامه‌ها، ثبت‌نام و مطالعه قوانین با ما در ارتباط باش.</p>
-            
-            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 25px;">
-                <a href="https://t.me/JudgeKY" target="_blank" class="btn">پیام در تلگرام (@JudgeKY)</a>
-                <a href="rules.html" class="btn" style="background-color: var(--dark-green); border: 1px solid var(--orange);">مشاهده قوانین کمپ</a>
+            <div data-aos="fade-up">
+                <h2>آماده‌ای خاطره بعدی رو بسازی؟</h2>
+                <p>برای اطلاع از زمان برنامه‌ها، ثبت‌نام و مطالعه قوانین با ما در ارتباط باش.</p>
+                
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 25px;">
+                    <a href="https://t.me/JudgeKY" target="_blank" class="btn">پیام در تلگرام (@JudgeKY)</a>
+                    <a href="rules.html" class="btn" style="background-color: var(--dark-green); border: 1px solid var(--orange);">مشاهده قوانین کمپ</a>
+                </div>
+                
+                <p style="font-size: 15px; color: var(--text-muted); margin-top: 15px;">
+                    آیدی تلگرام مدیر جهت هماهنگی: <strong style="color: var(--orange); direction: ltr; display: inline-block; font-size: 17px;">@JudgeKY</strong>
+                </p>
             </div>
-            
-            <p style="font-size: 15px; color: var(--text-muted); margin-top: 15px;">
-                آیدی تلگرام مدیر جهت هماهنگی: <strong style="color: var(--orange); direction: ltr; display: inline-block; font-size: 17px;">@JudgeKY</strong>
-            </p>
         </section>
     </main>
 
@@ -99,7 +121,17 @@
         <img class="modal-content" id="modalImage">
     </div>
 
+    <!-- لود کردن اسکریپت AOS و اسکریپت گالری -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
+        // راه‌اندازی انیمیشن AOS
+        AOS.init({
+            duration: 800, // مدت زمان انیمیشن
+            once: true,    // فقط یک بار اجرا شود
+            offset: 100    // فاصله از پایین صفحه برای شروع
+        });
+
+        // اسکریپت گالری (همون قبلی)
         const modal = document.getElementById("imageModal");
         const modalImg = document.getElementById("modalImage");
         const images = document.querySelectorAll(".gallery-img");
