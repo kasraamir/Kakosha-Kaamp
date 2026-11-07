@@ -55,7 +55,6 @@
             </div>
         </section>
 
-        <!-- بخش آمار و ارقام -->
         <section class="stats-section">
             <div class="stats-container" data-aos="fade-up">
                 <div class="stat-box">
@@ -83,39 +82,50 @@
             </div>
         </section>
 
-        <!-- بخش نظرات و تجربه مهمانان -->
-        <section class="testimonials-section">
-            <h2 data-aos="fade-up">تجربه مهمانان ما</h2>
-            <p class="subtitle" data-aos="fade-up" data-aos-delay="100">چند نفری که طعم شب‌های کاکوشا رو چشیدن</p>
+        <!-- ========================================= -->
+        <!-- بخش جدید: تجربه مهمانان و نظرسنجی -->
+        <!-- ========================================= -->
+        <section class="reviews-section" id="reviews">
+            <div class="section-header" data-aos="fade-up">
+                <h2>نظرات و تجربه‌ها</h2>
+                <p class="subtitle">صدای مهمانانی که لحظات خوبی در کنار ما ساختند</p>
+                
+                <!-- دکمه‌های هدایت‌کننده -->
+                <div class="review-actions">
+                    <a href="#reviews-grid" class="btn action-btn">تجربه مهمانان</a>
+                    <button class="btn action-btn outline-btn" onclick="openSurveyModal()">ثبت نظرسنجی</button>
+                </div>
+            </div>
             
-            <div class="testimonials-grid">
+            <!-- گرید نظرها -->
+            <div class="testimonials-grid" id="reviews-grid">
                 <!-- نظر ۱ -->
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="stars">★★★★★</div>
                     <p class="review-text">"یکی از بهترین تجربه‌های زندگی‌ام بود. فضای صمیمی، آتش و آسمان پرستاره... واقعاً از روزمرگی خارج شدیم."</p>
                     <div class="reviewer-info">
                         <strong>امیر رضایی</strong>
-                        <span>شرکت‌کننده در کمپ مهر</span>
+                        <span>کمپ مهر ۱۴۰۳</span>
                     </div>
                 </div>
 
                 <!-- نظر ۲ -->
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="stars">★★★★★</div>
                     <p class="review-text">"کادر بسیار حرفه‌ای و دلسوزی داشتن. همه چیز از قبل برنامه‌ریزی شده بود و ما فقط باید از لحظه‌ها لذت می‌بردیم."</p>
                     <div class="reviewer-info">
                         <strong>سارا محمدی</strong>
-                        <span>شرکت‌کننده در کمپ شهریور</span>
+                        <span>کمپ شهریور ۱۴۰۳</span>
                     </div>
                 </div>
 
                 <!-- نظر ۳ -->
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="stars">★★★★☆</div>
                     <p class="review-text">"دورهمی با دوستان جدید، بازی‌های گروهی و صدای گیتار کنار آتش. جای هیچ استرسی نبود. حتماً دوباره میام."</p>
                     <div class="reviewer-info">
                         <strong>رضا کریمی</strong>
-                        <span>شرکت‌کننده در کمپ مرداد</span>
+                        <span>کمپ مرداد ۱۴۰۳</span>
                     </div>
                 </div>
             </div>
@@ -156,20 +166,60 @@
         <p>© کاکوشا کمپ — تمامی حقوق محفوظ است.</p>
     </footer>
 
+    <!-- ========================================= -->
+    <!-- مودال (پنجره بازشو) فرم نظرسنجی -->
+    <!-- ========================================= -->
+    <div id="surveyModal" class="survey-modal">
+        <div class="survey-modal-content">
+            <span class="close-survey" onclick="closeSurveyModal()">&times;</span>
+            <h3>ثبت نظرسنجی</h3>
+            <p class="modal-desc">تجربه خود را با ما به اشتراک بگذارید. (شماره تماس شما محفوظ می‌ماند و نمایش داده نمی‌شود)</p>
+            
+            <form id="surveyForm" onsubmit="submitSurvey(event)">
+                <div class="form-group">
+                    <input type="tel" id="phone" placeholder="شماره تماس (برای هماهنگی)" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" id="fname" placeholder="نام" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="lname" placeholder="نام خانوادگی" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea id="review" rows="4" placeholder="نظر خود را بنویسید..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label style="color: var(--text-muted); font-size: 14px; display: block; margin-bottom: 10px;">امتیاز شما به کمپ:</label>
+                    <div class="star-rating">
+                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5">★</label>
+                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4">★</label>
+                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3">★</label>
+                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2">★</label>
+                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1">★</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn submit-btn">تایید و ثبت نظر</button>
+            </form>
+            <div id="successMessage" class="success-message" style="display: none;">
+                <p>✅ نظر شما با موفقیت ثبت شد!</p>
+                <p style="font-size: 13px;">پس از تایید مدیر، نظر شما در سایت نمایش داده می‌شود.</p>
+            </div>
+        </div>
+    </div>
+
     <div id="imageModal" class="modal">
         <span class="close-modal">&times;</span>
         <img class="modal-content" id="modalImage">
     </div>
 
-    <!-- لود کردن اسکریپت AOS و اسکریپت گالری -->
+    <!-- لود کردن اسکریپت‌ها -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 50
-        });
+        AOS.init({ duration: 800, once: true, offset: 50 });
 
+        // گالری
         const modal = document.getElementById("imageModal");
         const modalImg = document.getElementById("modalImage");
         const images = document.querySelectorAll(".gallery-img");
@@ -181,16 +231,45 @@
                 modalImg.src = this.src;
             });
         });
+        closeBtn.addEventListener("click", function(){ modal.style.display = "none"; });
+        modal.addEventListener("click", function(e){ if(e.target === modal) modal.style.display = "none"; });
 
-        closeBtn.addEventListener("click", function(){
-            modal.style.display = "none";
-        });
+        // اسکریپت مودال نظرسنجی
+        const surveyModal = document.getElementById("surveyModal");
+        const surveyForm = document.getElementById("surveyForm");
+        const successMessage = document.getElementById("successMessage");
 
-        modal.addEventListener("click", function(e){
-            if(e.target === modal){
-                modal.style.display = "none";
+        function openSurveyModal() {
+            surveyModal.style.display = "flex";
+            surveyForm.style.display = "block";
+            successMessage.style.display = "none";
+            surveyForm.reset();
+        }
+
+        function closeSurveyModal() {
+            surveyModal.style.display = "none";
+        }
+
+        function submitSurvey(event) {
+            event.preventDefault(); // جلوگیری از رفرش صفحه
+            
+            // اینجا در واقعیت باید اطلاعات به سرور فرستاده بشه
+            // فعلا فقط پیام موفقیت نشون میدیم
+            surveyForm.style.display = "none";
+            successMessage.style.display = "block";
+            
+            // بستن خودکار بعد از ۳ ثانیه
+            setTimeout(() => {
+                closeSurveyModal();
+            }, 3000);
+        }
+
+        // بستن مودال با کلیک بیرون
+        window.onclick = function(event) {
+            if (event.target == surveyModal) {
+                closeSurveyModal();
             }
-        });
+        }
     </script>
 </body>
 </html>
