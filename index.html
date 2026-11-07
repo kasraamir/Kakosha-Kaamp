@@ -55,19 +55,21 @@
             </div>
         </section>
 
-        <!-- بخش جدید: آمار و ارقام -->
+        <!-- بخش جدید: آمار و ارقام (داخل باکس) -->
         <section class="stats-section">
-            <div class="stat-box" data-aos="zoom-in" data-aos-delay="100">
-                <h3>+۵۰۰</h3>
-                <p>مسافر خوشحال</p>
-            </div>
-            <div class="stat-box" data-aos="zoom-in" data-aos-delay="200">
-                <h3>+۲۰</h3>
-                <p>کمپ برگزار شده</p>
-            </div>
-            <div class="stat-box" data-aos="zoom-in" data-aos-delay="300">
-                <h3>۹۸٪</h3>
-                <p>رضایت شرکت‌کنندگان</p>
+            <div class="stats-container" data-aos="fade-up">
+                <div class="stat-box">
+                    <h3>+۵۰۰</h3>
+                    <p>مسافر خوشحال</p>
+                </div>
+                <div class="stat-box">
+                    <h3>+۲۰</h3>
+                    <p>کمپ برگزار شده</p>
+                </div>
+                <div class="stat-box">
+                    <h3>۹۸٪</h3>
+                    <p>رضایت شرکت‌کنندگان</p>
+                </div>
             </div>
         </section>
 
@@ -78,6 +80,44 @@
             </div>
             <div class="about-image" data-aos="fade-right">
                 <img src="about.jpg" alt="دورهمی دوستان">
+            </div>
+        </section>
+
+        <!-- بخش جدید: نظرات و تجربه مهمانان -->
+        <section class="testimonials-section">
+            <h2 data-aos="fade-up">تجربه مهمانان ما</h2>
+            <p class="subtitle" data-aos="fade-up" data-aos-delay="100">چند نفری که طعم شب‌های کاکوشا رو چشیدن</p>
+            
+            <div class="testimonials-grid">
+                <!-- نظر ۱ -->
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"یکی از بهترین تجربه‌های زندگی‌ام بود. فضای صمیمی، آتش و آسمان پرستاره... واقعاً از روزمرگی خارج شدیم."</p>
+                    <div class="reviewer-info">
+                        <strong>امیر رضایی</strong>
+                        <span>شرکت‌کننده در کمپ مهر</span>
+                    </div>
+                </div>
+
+                <!-- نظر ۲ -->
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"کادر بسیار حرفه‌ای و دلسوزی داشتن. همه چیز از قبل برنامه‌ریزی شده بود و ما فقط باید از لحظه‌ها لذت می‌بردیم."</p>
+                    <div class="reviewer-info">
+                        <strong>سارا محمدی</strong>
+                        <span>شرکت‌کننده در کمپ شهریور</span>
+                    </div>
+                </div>
+
+                <!-- نظر ۳ -->
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stars">★★★★☆</div>
+                    <p class="review-text">"دورهمی با دوستان جدید، بازی‌های گروهی و صدای گیتار کنار آتش. جای هیچ استرسی نبود. حتماً دوباره میام."</p>
+                    <div class="reviewer-info">
+                        <strong>رضا کریمی</strong>
+                        <span>شرکت‌کننده در کمپ مرداد</span>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -124,14 +164,12 @@
     <!-- لود کردن اسکریپت AOS و اسکریپت گالری -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // راه‌اندازی انیمیشن AOS
         AOS.init({
-            duration: 800, // مدت زمان انیمیشن
-            once: true,    // فقط یک بار اجرا شود
-            offset: 100    // فاصله از پایین صفحه برای شروع
+            duration: 800,
+            once: true,
+            offset: 100
         });
 
-        // اسکریپت گالری (همون قبلی)
         const modal = document.getElementById("imageModal");
         const modalImg = document.getElementById("modalImage");
         const images = document.querySelectorAll(".gallery-img");
