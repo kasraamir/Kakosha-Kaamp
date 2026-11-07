@@ -4,21 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>کاکوشا | کمپ و دورهمی</title>
-    <!-- لود فونت وزیرمتن -->
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap" rel="stylesheet">
-    <!-- اتصال به فایل CSS که کنار همین فایل است -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <!-- هدر سایت -->
     <header class="site-header">
-        <!-- لوگو: عکسی که با نام logo.png آپلود می‌کنی -->
         <a href="#" class="logo">
             <img src="logo.png" alt="لوگوی کاکوشا" onerror="this.style.display='none'">
         </a>
-        
-        <!-- منوی ساده -->
         <nav class="nav-menu">
             <a href="#home">خانه</a>
             <a href="#about">درباره ما</a>
@@ -45,7 +40,6 @@
                 <p>اگر به دنبال مکانی برای دور شدن از شلوغی‌های روزمره و لذت بردن از طبیعت هستید، کمپ کاکوشا انتخابی جذاب برای شماست. ما فضایی امن و صمیمی برای استراحت و تفریح شما فراهم کرده‌ایم.</p>
             </div>
             <div class="about-image">
-                <!-- عکس درباره ما: about.jpg -->
                 <img src="about.jpg" alt="دورهمی دوستان">
             </div>
         </section>
@@ -54,13 +48,15 @@
         <section class="gallery-section" id="gallery">
             <h2>گالری دورهمی‌ها</h2>
             <div class="gallery-grid">
-                <!-- عکس‌های گالری: g-1.jpg تا g-6.jpg (می‌تونی بیشتر هم بذاری) -->
-                <img src="g-1.jpg" alt="گالری ۱">
-                <img src="g-2.jpg" alt="گالری ۲">
-                <img src="g-3.jpg" alt="گالری ۳">
-                <img src="g-4.jpg" alt="گالری ۴">
-                <img src="g-5.jpg" alt="گالری ۵">
-                <img src="g-6.jpg" alt="گالری ۶">
+                <!-- دقت کن که پسوند g-5 و g-8 رو png گذاشتم -->
+                <img src="g-1.jpg" alt="گالری ۱" class="gallery-img">
+                <img src="g-2.jpg" alt="گالری ۲" class="gallery-img">
+                <img src="g-3.jpg" alt="گالری ۳" class="gallery-img">
+                <img src="g-4.jpg" alt="گالری ۴" class="gallery-img">
+                <img src="g-5.png" alt="گالری ۵" class="gallery-img">
+                <img src="g-6.jpg" alt="گالری ۶" class="gallery-img">
+                <img src="g-7.jpg" alt="گالری ۷" class="gallery-img">
+                <img src="g-8.png" alt="گالری ۸" class="gallery-img">
             </div>
         </section>
 
@@ -76,5 +72,38 @@
         <p>© کاکوشا کمپ — تمامی حقوق محفوظ است.</p>
     </footer>
 
+    <!-- پنجره مودال (برای باز شدن عکس‌ها) -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <!-- اسکریپت برای باز شدن عکس‌ها -->
+    <script>
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImage");
+        const images = document.querySelectorAll(".gallery-img");
+        const closeBtn = document.querySelector(".close-modal");
+
+        // وقتی روی عکس کلیک میشه
+        images.forEach(img => {
+            img.addEventListener("click", function(){
+                modal.style.display = "flex";
+                modalImg.src = this.src;
+            });
+        });
+
+        // وقتی روی ضربدر کلیک میشه
+        closeBtn.addEventListener("click", function(){
+            modal.style.display = "none";
+        });
+
+        // وقتی بیرون از عکس کلیک میشه
+        modal.addEventListener("click", function(e){
+            if(e.target === modal){
+                modal.style.display = "none";
+            }
+        });
+    </script>
 </body>
 </html>
