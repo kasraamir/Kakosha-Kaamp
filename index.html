@@ -18,6 +18,7 @@
             <a href="#home">خانه</a>
             <a href="#about">درباره ما</a>
             <a href="#gallery">گالری</a>
+            <a href="rules.html">قوانین کمپ</a> <!-- لینک صفحه قوانین -->
             <a href="#contact">تماس با ما</a>
         </nav>
     </header>
@@ -48,7 +49,6 @@
         <section class="gallery-section" id="gallery">
             <h2>گالری دورهمی‌ها</h2>
             <div class="gallery-grid">
-                <!-- دقت شده که پسوند g-5 و g-8 رو png باشه -->
                 <img src="g-1.jpg" alt="گالری ۱" class="gallery-img">
                 <img src="g-2.jpg" alt="گالری ۲" class="gallery-img">
                 <img src="g-3.jpg" alt="گالری ۳" class="gallery-img">
@@ -63,8 +63,12 @@
         <!-- بخش تماس -->
         <section class="contact" id="contact">
             <h2>آماده‌ای خاطره بعدی رو بسازی؟</h2>
-            <p>برای اطلاع از زمان برنامه‌ها با ما در ارتباط باش.</p>
-            <a href="mailto:hello@example.com" class="btn">تماس با ما</a>
+            <p>برای اطلاع از زمان برنامه‌ها و مطالعه قوانین با ما در ارتباط باش.</p>
+            <!-- دکمه‌های تماس و قوانین در پایین صفحه -->
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="mailto:hello@example.com" class="btn">تماس با ما</a>
+                <a href="rules.html" class="btn" style="background-color: var(--dark-green); border: 1px solid var(--orange);">مشاهده قوانین کمپ</a>
+            </div>
         </section>
     </main>
 
@@ -85,7 +89,6 @@
         const images = document.querySelectorAll(".gallery-img");
         const closeBtn = document.querySelector(".close-modal");
 
-        // وقتی روی عکس کلیک میشه، مودال باز میشه
         images.forEach(img => {
             img.addEventListener("click", function(){
                 modal.style.display = "flex";
@@ -93,12 +96,10 @@
             });
         });
 
-        // بستن مودال با کلیک روی ضربدر
         closeBtn.addEventListener("click", function(){
             modal.style.display = "none";
         });
 
-        // بستن مودال با کلیک روی فضای خالی (بیرون از عکس)
         modal.addEventListener("click", function(e){
             if(e.target === modal){
                 modal.style.display = "none";
