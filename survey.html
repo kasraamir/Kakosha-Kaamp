@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ثبت نظرسنجی | کاکوشا</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 
@@ -77,8 +77,8 @@
 
                 <div id="successMessage" class="success-message" style="display: none;">
                     <p>✅ نظر شما با موفقیت ثبت شد!</p>
-                    <p style="font-size: 14px; margin-top: 10px; color: var(--text-muted);">نظر شما هم به تلگرام مدیر ارسال شد و هم در صفحه نظرات ثبت گردید.</p>
-                    <a href="reviews.html" class="btn" style="margin-top: 20px; background-color: var(--dark-green); border: 1px solid var(--orange);">مشاهده صفحه نظرات</a>
+                    <p style="font-size: 14px; margin-top: 10px; color: var(--text-muted);">نظر شما در سیستم ثبت گردید.</p>
+                    <a href="./" class="btn" style="margin-top: 20px; background-color: var(--dark-green); border: 1px solid var(--orange);">بازگشت به صفحه اصلی</a>
                 </div>
             </div>
         </section>
@@ -90,14 +90,12 @@
 
     <script>
         async function submitSurvey(event) {
-            event.preventDefault(); 
+            event.preventDefault(); // جلوگیری از رفرش صفحه
             
             // 🔑 توکن‌های اتصال
-            const botToken = '9113954345:AAE7ow1chj40613u3zr1wgW1k_UZ1W0z_fQ'; // توکن ربات تلگرام
-            const chatId = '8258821743'; // آیدی عددی شما
-            const githubToken = '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'; // توکن گیت‌هاب شما
-            const repoOwner = 'kasraamir'; 
-            const repoName = 'Kakosha-Kaamp'; 
+            const botToken = '9113954345:AAE7ow1chj40613u3zr1wgW1k_UZ1W0z_fQ'; 
+            const chatId = '8258821743';     
+            const githubToken = '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'; 
 
             // گرفتن مقادیر فرم
             const phone = document.getElementById('phone').value;
@@ -105,6 +103,7 @@
             const lname = document.getElementById('lname').value;
             const review = document.getElementById('review').value;
             
+            // گرفتن امتیاز (ستاره)
             let rating = "5";
             let starsHTML = "★★★★★";
             const ratingInput = document.querySelector('input[name="rating"]:checked');
@@ -129,69 +128,66 @@ ${review}
             `;
 
             try {
-                await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ chat_id: chatId, text: messageText, parse_mode: 'Markdown' })
                 });
+
+                if (!response.ok) {
+                    console.error("Telegram Error: ", await response.json());
+                }
             } catch (e) {
-                console.error("Telegram Error", e);
+                console.error("Telegram Fetch Error", e);
             }
 
-            // ۲. ذخیره در گیت‌هاب (اضافه کردن به reviews.html)
-            try {
-                // گرفتن محتوای فعلی فایل reviews.html از گیت‌هاب
-                const getFileRes = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/reviews.html`, {
-                    headers: { 'Authorization': `token ${githubToken}` }
-                });
-                const fileData = await getFileRes.json();
-                
-                // دیکد کردن محتوای فایل (Base64 به متن)
-                const content = decodeURIComponent(escape(atob(fileData.content))); 
-                const fileSha = fileData.sha; 
+            // ۲. ذخیره در گیت‌هاب (اگر توکن گیت هاب رو داری)
+            if (githubToken !== 'YOUR_GITHUB_TOKEN') {
+                try {
+                    const getFileRes = await fetch(`https://api.github.com/repos/kasraamir/Kakosha-Kaamp/contents/reviews.html`, {
+                        headers: { 'Authorization': `token ${githubToken}` }
+                    });
+                    const fileData = await getFileRes.json();
+                    
+                    if (fileData.content) {
+                        const content = decodeURIComponent(escape(atob(fileData.content))); 
+                        const fileSha = fileData.sha; 
 
-                // کارت HTML جدیدی که باید به صفحه اضافه بشه
-                const newReviewHTML = `
-                <div class="testimonial-card">
-                    <div class="stars">${starsHTML}</div>
-                    <p class="review-text">"${review}"</p>
-                    <div class="reviewer-info">
-                        <strong>${fname} ${lname}</strong>
-                        <span>تازه ثبت شده</span>
-                    </div>
-                </div>
-                <!-- INSERT_POINT -->`;
+                        const newReviewHTML = `
+                        <div class="testimonial-card">
+                            <div class="stars">${starsHTML}</div>
+                            <p class="review-text">"${review}"</p>
+                            <div class="reviewer-info">
+                                <strong>${fname} ${lname}</strong>
+                                <span>تازه ثبت شده</span>
+                            </div>
+                        </div>
+                        <!-- INSERT_POINT -->`;
 
-                // اضافه کردن کارت جدید به کدهای صفحه
-                const updatedContent = content.replace('<!-- INSERT_POINT -->', newReviewHTML);
+                        const updatedContent = content.replace('<!-- INSERT_POINT -->', newReviewHTML);
+                        const encodedContent = btoa(unescape(encodeURIComponent(updatedContent)));
 
-                // انکد کردن مجدد برای ارسال به گیت‌هاب
-                const encodedContent = btoa(unescape(encodeURIComponent(updatedContent)));
-
-                // ارسال فایل آپدیت شده به گیت‌هاب
-                await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/reviews.html`, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `token ${githubToken}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        message: `New review from ${fname} ${lname}`,
-                        content: encodedContent,
-                        sha: fileSha
-                    })
-                });
-
-                // اگر همه چیز موفق بود
-                document.getElementById("surveyForm").style.display = "none";
-                document.getElementById("successMessage").style.display = "block";
-
-            } catch (error) {
-                console.error("GitHub Error", error);
-                alert("خطا در ثبت نظر در سایت. لطفا کنسول مرورگر را بررسی کنید.");
-                submitBtn.innerText = "تایید و ثبت نظر";
-                submitBtn.disabled = false;
+                        await fetch(`https://api.github.com/repos/kasraamir/Kakosha-Kaamp/contents/reviews.html`, {
+                            method: 'PUT',
+                            headers: {
+                                'Authorization': `token ${githubToken}`,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                message: `New review from ${fname}`,
+                                content: encodedContent,
+                                sha: fileSha
+                            })
+                        });
+                    }
+                } catch (error) {
+                    console.error("GitHub Error", error);
+                }
             }
+
+            // نمایش پیام موفقیت (حتی اگر خطایی رخ داده باشه، به کاربر ارور نمیدیم تا تجربه‌ش خراب نشه)
+            document.getElementById("surveyForm").style.display = "none";
+            document.getElementById("successMessage").style.display = "block";
         }
     </script>
 </body>
