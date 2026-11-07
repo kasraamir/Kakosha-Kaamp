@@ -27,7 +27,7 @@ a { text-decoration: none; color: inherit; }
 img { display: block; max-width: 100%; }
 
 /* =========================================
-   2. هدر، منو و شبکه‌های اجتماعی
+   2. هدر، منو و شبکه‌های اجتماعی (فیکس شده)
    ========================================= */
 .site-header {
     background-color: var(--dark-green);
@@ -52,6 +52,7 @@ img { display: block; max-width: 100%; }
     width: auto;
 }
 
+/* فیکس کردن آیکون‌ها */
 .social-links {
     display: flex;
     gap: 10px;
@@ -64,24 +65,27 @@ img { display: block; max-width: 100%; }
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.05);
-    color: var(--text-muted);
+    background-color: rgba(255, 255, 255, 0.08);
+    color: var(--text-muted) !important; /* رنگ آیکون */
     transition: all 0.3s ease;
     border: 1px solid transparent;
 }
 
+/* تعیین سایز دقیق برای آیکون‌های SVG */
 .social-links a svg {
-    width: 18px;
-    height: 18px;
+    width: 18px !important;
+    height: 18px !important;
+    max-width: 18px !important;
+    max-height: 18px !important;
 }
 
 .social-links a:hover {
     background-color: var(--orange);
-    color: #fff;
-    transform: translateY(-3px) scale(1.05);
+    color: #fff !important;
+    transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(255, 107, 0, 0.4);
 }
 
@@ -112,26 +116,10 @@ img { display: block; max-width: 100%; }
     padding: 60px 5%;
 }
 
-.hero-content {
-    max-width: 700px;
-}
-
-.date {
-    color: var(--orange);
-    font-size: 20px;
-    font-weight: 800;
-}
-
-.hero h1 {
-    font-size: clamp(35px, 6vw, 65px);
-    line-height: 1.3;
-    margin: 10px 0 20px;
-}
-
-.hero p {
-    font-size: 16px;
-    margin-bottom: 30px;
-}
+.hero-content { max-width: 700px; }
+.date { color: var(--orange); font-size: 20px; font-weight: 800; }
+.hero h1 { font-size: clamp(35px, 6vw, 65px); line-height: 1.3; margin: 10px 0 20px; }
+.hero p { font-size: 16px; margin-bottom: 30px; }
 
 /* =========================================
    4. دکمه‌ها
@@ -164,18 +152,8 @@ img { display: block; max-width: 100%; }
     align-items: center;
 }
 
-.about-text h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-    color: var(--orange);
-}
-
-.about-text p {
-    color: var(--text-muted);
-    font-size: 15px;
-    line-height: 2;
-}
-
+.about-text h2 { font-size: 36px; margin-bottom: 20px; color: var(--orange); }
+.about-text p { color: var(--text-muted); font-size: 15px; line-height: 2; }
 .about-image img {
     width: 100%;
     height: 400px;
@@ -187,23 +165,13 @@ img { display: block; max-width: 100%; }
 /* =========================================
    6. بخش گالری
    ========================================= */
-.gallery-section {
-    padding: 80px 5%;
-    background-color: #042b20;
-    text-align: center;
-}
-
-.gallery-section h2 {
-    font-size: 36px;
-    margin-bottom: 40px;
-}
-
+.gallery-section { padding: 80px 5%; background-color: #042b20; text-align: center; }
+.gallery-section h2 { font-size: 36px; margin-bottom: 40px; }
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 15px;
 }
-
 .gallery-grid img {
     width: 100%;
     height: 200px;
@@ -212,30 +180,14 @@ img { display: block; max-width: 100%; }
     transition: 0.3s;
     cursor: pointer;
 }
-
-.gallery-grid img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-}
+.gallery-grid img:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
 
 /* =========================================
    7. بخش تماس و فوتر
    ========================================= */
-.contact {
-    text-align: center;
-    padding: 80px 5%;
-}
-
-.contact h2 {
-    font-size: 32px;
-    margin-bottom: 15px;
-}
-
-.contact p {
-    color: var(--text-muted);
-    margin-bottom: 30px;
-}
-
+.contact { text-align: center; padding: 80px 5%; }
+.contact h2 { font-size: 32px; margin-bottom: 15px; }
+.contact p { color: var(--text-muted); margin-bottom: 30px; }
 footer {
     background-color: var(--dark-green);
     text-align: center;
@@ -251,16 +203,13 @@ footer {
     display: none;
     position: fixed;
     z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
     background-color: rgba(0, 0, 0, 0.9);
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(5px);
 }
-
 .modal-content {
     max-width: 90%;
     max-height: 85vh;
@@ -268,56 +217,25 @@ footer {
     box-shadow: 0 0 30px rgba(255, 107, 0, 0.3);
     animation: zoomIn 0.3s ease;
 }
-
 .close-modal {
     position: absolute;
-    top: 20px;
-    left: 30px;
+    top: 20px; left: 30px;
     color: #fff;
     font-size: 40px;
     font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
 }
-
-.close-modal:hover {
-    color: var(--orange);
-}
-
-@keyframes zoomIn {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
+.close-modal:hover { color: var(--orange); }
+@keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
 /* =========================================
    9. استایل مخصوص صفحه قوانین (Rules)
    ========================================= */
-.rules-section {
-    padding: 80px 5%;
-    display: flex;
-    justify-content: center;
-    min-height: 80vh;
-}
-
-.rules-container {
-    max-width: 800px;
-    width: 100%;
-}
-
-.rules-container h1 {
-    font-size: 40px;
-    color: var(--orange);
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.rules-container .subtitle {
-    text-align: center;
-    color: var(--text-muted);
-    margin-bottom: 50px;
-    font-size: 16px;
-}
-
+.rules-section { padding: 80px 5%; display: flex; justify-content: center; min-height: 80vh; }
+.rules-container { max-width: 800px; width: 100%; }
+.rules-container h1 { font-size: 40px; color: var(--orange); text-align: center; margin-bottom: 10px; }
+.rules-container .subtitle { text-align: center; color: var(--text-muted); margin-bottom: 50px; font-size: 16px; }
 .rule-card {
     background-color: var(--dark-green);
     border-right: 5px solid var(--orange);
@@ -326,29 +244,10 @@ footer {
     border-radius: 8px;
     transition: transform 0.3s, background-color 0.3s;
 }
-
-.rule-card:hover {
-    transform: translateX(-10px);
-    background-color: #032016;
-}
-
-.rule-card h3 {
-    color: var(--text-main);
-    font-size: 22px;
-    margin-bottom: 10px;
-}
-
-.rule-card p {
-    color: var(--text-muted);
-    font-size: 15px;
-    line-height: 1.9;
-}
-
-.back-btn-container {
-    text-align: center;
-    margin-top: 50px;
-}
-
+.rule-card:hover { transform: translateX(-10px); background-color: #032016; }
+.rule-card h3 { color: var(--text-main); font-size: 22px; margin-bottom: 10px; }
+.rule-card p { color: var(--text-muted); font-size: 15px; line-height: 1.9; }
+.back-btn-container { text-align: center; margin-top: 50px; }
 .highlight-box {
     background: linear-gradient(135deg, rgba(255, 107, 0, 0.15), rgba(10, 104, 73, 0.2));
     border: 1px solid var(--orange);
@@ -358,30 +257,13 @@ footer {
     text-align: center;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
-
-.highlight-box p {
-    color: var(--orange);
-    font-size: 18px;
-    font-weight: 800;
-    margin: 0;
-}
+.highlight-box p { color: var(--orange); font-size: 18px; font-weight: 800; margin: 0; }
 
 /* =========================================
    10. استایل بلیط ثبت نام (Register)
    ========================================= */
-.register-section {
-    padding: 80px 5%;
-    background-color: #042b20;
-    text-align: center;
-}
-
-.ticket-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
+.register-section { padding: 80px 5%; background-color: #042b20; text-align: center; }
+.ticket-wrapper { display: flex; justify-content: center; align-items: center; padding: 20px; }
 .ticket {
     display: flex;
     background-color: #0b3024;
@@ -393,241 +275,71 @@ footer {
     border: 1px solid #ffffff1a;
     overflow: hidden;
 }
-
 .ticket::before {
-    content: "";
-    position: absolute;
-    right: 25%;
-    top: 10px;
-    bottom: 10px;
-    border-right: 2px dashed #ffffff30;
-    z-index: 2;
+    content: ""; position: absolute; right: 25%; top: 10px; bottom: 10px;
+    border-right: 2px dashed #ffffff30; z-index: 2;
 }
-
 .ticket::after {
-    content: "";
-    position: absolute;
-    right: calc(25% - 10px);
-    top: -10px;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    background-color: #042b20;
-    box-shadow: 0 100% 0 0 #042b20;
-    z-index: 3;
+    content: ""; position: absolute; right: calc(25% - 10px); top: -10px;
+    height: 20px; width: 20px; border-radius: 50%;
+    background-color: #042b20; box-shadow: 0 100% 0 0 #042b20; z-index: 3;
 }
-
-.ticket-main {
-    flex: 1;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
+.ticket-main { flex: 1; padding: 30px; display: flex; flex-direction: column; justify-content: space-between; }
 .ticket-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ffffff1a;
-    padding-bottom: 15px;
-    margin-bottom: 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid #ffffff1a; padding-bottom: 15px; margin-bottom: 20px;
 }
-
-.ticket-logo {
-    font-weight: 800;
-    font-size: 20px;
-    color: var(--orange);
-}
-
-.ticket-type {
-    font-size: 12px;
-    background: #ffffff1a;
-    padding: 4px 10px;
-    border-radius: 20px;
-    letter-spacing: 1px;
-}
-
-.ticket-body {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    text-align: right;
-}
-
-.ticket-info span {
-    display: block;
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-bottom: 4px;
-}
-
-.ticket-info strong {
-    font-size: 16px;
-    color: var(--text-main);
-}
-
+.ticket-logo { font-weight: 800; font-size: 20px; color: var(--orange); }
+.ticket-type { font-size: 12px; background: #ffffff1a; padding: 4px 10px; border-radius: 20px; letter-spacing: 1px; }
+.ticket-body { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: right; }
+.ticket-info span { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+.ticket-info strong { font-size: 16px; color: var(--text-main); }
 .ticket-footer {
-    margin-top: 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid #ffffff1a;
-    padding-top: 15px;
-    font-size: 12px;
-    color: var(--text-muted);
+    margin-top: 25px; display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid #ffffff1a; padding-top: 15px; font-size: 12px; color: var(--text-muted);
 }
-
 .barcode {
-    width: 100px;
-    height: 20px;
-    background: repeating-linear-gradient(
-        90deg,
-        #ffffff 0px,
-        #ffffff 2px,
-        transparent 2px,
-        transparent 4px,
-        #ffffff 4px,
-        #ffffff 6px,
-        transparent 6px,
-        transparent 8px
-    );
+    width: 100px; height: 20px;
+    background: repeating-linear-gradient(90deg, #ffffff 0px, #ffffff 2px, transparent 2px, transparent 4px, #ffffff 4px, #ffffff 6px, transparent 6px, transparent 8px);
 }
-
 .ticket-stub {
-    width: 25%;
-    padding: 30px 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.02);
+    width: 25%; padding: 30px 15px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.02);
 }
-
-.ticket-stub-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    width: 100%;
-}
-
-.stub-title {
-    font-weight: 800;
-    color: var(--orange);
-    font-size: 14px;
-}
-
+.ticket-stub-content { display: flex; flex-direction: column; align-items: center; gap: 15px; width: 100%; }
+.stub-title { font-weight: 800; color: var(--orange); font-size: 14px; }
 .qr-placeholder {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 4px;
-    width: 60px;
-    height: 60px;
-    background: white;
-    padding: 6px;
-    border-radius: 4px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;
+    width: 60px; height: 60px; background: white; padding: 6px; border-radius: 4px;
 }
-
-.qr-block {
-    background-color: #0b3024;
-    width: 100%;
-    height: 100%;
-}
-
-.ticket-btn {
-    padding: 8px 10px;
-    font-size: 12px;
-    width: 100%;
-}
+.qr-block { background-color: #0b3024; width: 100%; height: 100%; }
+.ticket-btn { padding: 8px 10px; font-size: 12px; width: 100%; }
 
 /* =========================================
    11. واکنش‌گرا (موبایل)
    ========================================= */
 @media (max-width: 768px) {
-    .site-header {
-        flex-direction: column;
-        gap: 15px;
-        padding: 15px;
-    }
-    
-    .header-right {
-        flex-direction: column;
-        gap: 15px;
-        width: 100%;
-        align-items: center;
-    }
-
+    .site-header { flex-direction: column; gap: 15px; padding: 15px; }
+    .header-right { flex-direction: column; gap: 15px; width: 100%; align-items: center; }
     .social-links {
-        border-right: none;
-        padding-right: 0;
-        border-top: 1px solid #ffffff20;
-        padding-top: 15px;
-        width: 100%;
-        justify-content: center;
+        border-right: none; padding-right: 0; border-top: 1px solid #ffffff20;
+        padding-top: 15px; width: 100%; justify-content: center;
     }
+    .nav-menu { gap: 15px; font-size: 14px; flex-wrap: wrap; justify-content: center; }
+    .about { grid-template-columns: 1fr; }
+    .about-image img { height: 300px; }
+    .hero { min-height: 500px; padding: 40px 5%; }
     
-    .nav-menu {
-        gap: 15px;
-        font-size: 14px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .about {
-        grid-template-columns: 1fr;
-    }
-
-    .about-image img {
-        height: 300px;
-    }
-
-    .hero {
-        min-height: 500px;
-        padding: 40px 5%;
-    }
-
     /* اصلاح بلیط در موبایل */
-    .ticket {
-        flex-direction: column;
-        max-width: 100%;
-    }
-    
-    .ticket::before, .ticket::after {
-        display: none;
-    }
-
-    .ticket-main {
-        padding: 20px;
-    }
-
-    .ticket-body {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
+    .ticket { flex-direction: column; max-width: 100%; }
+    .ticket::before, .ticket::after { display: none; }
+    .ticket-main { padding: 20px; }
+    .ticket-body { grid-template-columns: 1fr; gap: 12px; }
     .ticket-stub {
-        width: 100%;
-        border-top: 2px dashed #ffffff30;
-        padding: 20px;
-        flex-direction: row; 
-        justify-content: center;
-        gap: 20px;
+        width: 100%; border-top: 2px dashed #ffffff30; padding: 20px;
+        flex-direction: row; justify-content: center; gap: 20px;
     }
-
-    .ticket-stub-content {
-        flex-direction: row; 
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-    }
-    
-    .ticket-btn {
-        width: auto;
-        padding: 10px 20px;
-    }
-    
-    .ticket-type {
-        font-size: 11px;
-    }
+    .ticket-stub-content { flex-direction: row; justify-content: center; align-items: center; gap: 20px; }
+    .ticket-btn { width: auto; padding: 10px 20px; }
+    .ticket-type { font-size: 11px; }
 }
