@@ -1,3 +1,6 @@
+/* =========================================
+   تنظیمات پایه و رنگ‌ها
+   ========================================= */
 :root {
     --bg-color: #03251b;
     --dark-green: #021a12;
@@ -38,28 +41,59 @@ img { display: block; max-width: 100%; }
     border-bottom: 1px solid #ffffff1a;
 }
 
-.logo img { height: 45px; width: auto; }
-.nav-menu { display: flex; gap: 25px; }
-.nav-menu a { font-size: 15px; font-weight: 700; transition: color 0.3s; }
-.nav-menu a:hover { color: var(--orange); }
+.logo img {
+    height: 45px;
+    width: auto;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-menu a {
+    font-size: 15px;
+    font-weight: 700;
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+    color: var(--orange);
+}
 
 /* =========================================
    بخش هدر اصلی (Hero)
    ========================================= */
 .hero {
-    /* این خط عکس hero.jpg رو لود میکنه */
+    /* اینجا پسوند png تنظیم شده تا عکس هدرت لود بشه */
     background: linear-gradient(90deg, rgba(1,18,14,0.4), rgba(1,18,14,0.9)), 
-                url('hero.jpg') center/cover no-repeat;
+                url('hero.png') center/cover no-repeat;
     min-height: 600px;
     display: flex;
     align-items: flex-end;
     padding: 60px 5%;
 }
 
-.hero-content { max-width: 700px; }
-.date { color: var(--orange); font-size: 20px; font-weight: 800; }
-.hero h1 { font-size: clamp(35px, 6vw, 65px); line-height: 1.3; margin: 10px 0 20px; }
-.hero p { font-size: 16px; margin-bottom: 30px; }
+.hero-content {
+    max-width: 700px;
+}
+
+.date {
+    color: var(--orange);
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.hero h1 {
+    font-size: clamp(35px, 6vw, 65px);
+    line-height: 1.3;
+    margin: 10px 0 20px;
+}
+
+.hero p {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
 
 /* =========================================
    دکمه‌ها
@@ -73,7 +107,11 @@ img { display: block; max-width: 100%; }
     border-radius: 5px;
     transition: 0.3s;
 }
-.btn:hover { background-color: #ff8a33; transform: translateY(-3px); }
+
+.btn:hover {
+    background-color: #ff8a33;
+    transform: translateY(-3px);
+}
 
 /* =========================================
    بخش درباره ما
@@ -85,8 +123,19 @@ img { display: block; max-width: 100%; }
     padding: 80px 5%;
     align-items: center;
 }
-.about-text h2 { font-size: 36px; margin-bottom: 20px; color: var(--orange); }
-.about-text p { color: var(--text-muted); font-size: 15px; line-height: 2; }
+
+.about-text h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: var(--orange);
+}
+
+.about-text p {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 2;
+}
+
 .about-image img {
     width: 100%;
     height: 400px;
@@ -103,20 +152,27 @@ img { display: block; max-width: 100%; }
     background-color: #042b20;
     text-align: center;
 }
-.gallery-section h2 { font-size: 36px; margin-bottom: 40px; }
+
+.gallery-section h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 15px;
 }
+
 .gallery-grid img {
     width: 100%;
     height: 200px;
     object-fit: cover;
     border-radius: 8px;
     transition: 0.3s;
-    cursor: pointer; /* نشانگر ماوس تغییر میکنه */
+    cursor: pointer;
 }
+
 .gallery-grid img:hover {
     transform: scale(1.05);
     box-shadow: 0 10px 20px rgba(0,0,0,0.5);
@@ -125,9 +181,21 @@ img { display: block; max-width: 100%; }
 /* =========================================
    بخش تماس و فوتر
    ========================================= */
-.contact { text-align: center; padding: 80px 5%; }
-.contact h2 { font-size: 32px; margin-bottom: 15px; }
-.contact p { color: var(--text-muted); margin-bottom: 30px; }
+.contact {
+    text-align: center;
+    padding: 80px 5%;
+}
+
+.contact h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.contact p {
+    color: var(--text-muted);
+    margin-bottom: 30px;
+}
+
 footer {
     background-color: var(--dark-green);
     text-align: center;
@@ -140,7 +208,7 @@ footer {
    استایل برای پنجره باز شدن عکس (Modal)
    ========================================= */
 .modal {
-    display: none; /* مخفی در حالت عادی */
+    display: none;
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -152,6 +220,7 @@ footer {
     justify-content: center;
     backdrop-filter: blur(5px);
 }
+
 .modal-content {
     max-width: 90%;
     max-height: 85vh;
@@ -159,6 +228,7 @@ footer {
     box-shadow: 0 0 30px rgba(255, 107, 0, 0.3);
     animation: zoomIn 0.3s ease;
 }
+
 .close-modal {
     position: absolute;
     top: 20px;
@@ -169,7 +239,10 @@ footer {
     cursor: pointer;
     transition: 0.3s;
 }
-.close-modal:hover { color: var(--orange); }
+
+.close-modal:hover {
+    color: var(--orange);
+}
 
 @keyframes zoomIn {
     from { transform: scale(0.8); opacity: 0; }
@@ -180,8 +253,22 @@ footer {
    واکنش‌گرا (موبایل)
    ========================================= */
 @media (max-width: 768px) {
-    .site-header { flex-direction: column; gap: 15px; padding: 15px; }
-    .nav-menu { gap: 15px; font-size: 14px; }
-    .about { grid-template-columns: 1fr; }
-    .about-image img { height: 300px; }
+    .site-header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .nav-menu {
+        gap: 15px;
+        font-size: 14px;
+    }
+
+    .about {
+        grid-template-columns: 1fr;
+    }
+
+    .about-image img {
+        height: 300px;
+    }
 }
