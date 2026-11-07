@@ -12,7 +12,7 @@
     <!-- هدر سایت -->
     <header class="site-header">
         <a href="#" class="logo">
-            <img src="logo.png" alt="لوگوی کاکوشا" onerror="this.style.display='none'">
+            <img src="logo.png" alt="لوگوی کاکوشا">
         </a>
         <nav class="nav-menu">
             <a href="#home">خانه</a>
@@ -48,7 +48,7 @@
         <section class="gallery-section" id="gallery">
             <h2>گالری دورهمی‌ها</h2>
             <div class="gallery-grid">
-                <!-- دقت کن که پسوند g-5 و g-8 رو png گذاشتم -->
+                <!-- دقت شده که پسوند g-5 و g-8 رو png باشه -->
                 <img src="g-1.jpg" alt="گالری ۱" class="gallery-img">
                 <img src="g-2.jpg" alt="گالری ۲" class="gallery-img">
                 <img src="g-3.jpg" alt="گالری ۳" class="gallery-img">
@@ -78,14 +78,14 @@
         <img class="modal-content" id="modalImage">
     </div>
 
-    <!-- اسکریپت برای باز شدن عکس‌ها -->
+    <!-- اسکریپت برای باز شدن عکس‌ها با کلیک -->
     <script>
         const modal = document.getElementById("imageModal");
         const modalImg = document.getElementById("modalImage");
         const images = document.querySelectorAll(".gallery-img");
         const closeBtn = document.querySelector(".close-modal");
 
-        // وقتی روی عکس کلیک میشه
+        // وقتی روی عکس کلیک میشه، مودال باز میشه
         images.forEach(img => {
             img.addEventListener("click", function(){
                 modal.style.display = "flex";
@@ -93,12 +93,12 @@
             });
         });
 
-        // وقتی روی ضربدر کلیک میشه
+        // بستن مودال با کلیک روی ضربدر
         closeBtn.addEventListener("click", function(){
             modal.style.display = "none";
         });
 
-        // وقتی بیرون از عکس کلیک میشه
+        // بستن مودال با کلیک روی فضای خالی (بیرون از عکس)
         modal.addEventListener("click", function(e){
             if(e.target === modal){
                 modal.style.display = "none";
