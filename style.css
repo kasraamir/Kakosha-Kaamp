@@ -27,7 +27,7 @@ a { text-decoration: none; color: inherit; }
 img { display: block; max-width: 100%; }
 
 /* =========================================
-   2. هدر و منو
+   2. هدر، منو و شبکه‌های اجتماعی
    ========================================= */
 .site-header {
     background-color: var(--dark-green);
@@ -41,11 +41,53 @@ img { display: block; max-width: 100%; }
     border-bottom: 1px solid #ffffff1a;
 }
 
+/* بخش راست هدر (لوگو + آیکون‌ها) */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
 .logo img {
     height: 45px;
     width: auto;
 }
 
+/* استایل آیکون‌های شیشه‌ای شبکه‌های اجتماعی */
+.social-links {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-right: 1px solid #ffffff20;
+    padding-right: 20px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.social-links a svg {
+    width: 18px;
+    height: 18px;
+}
+
+.social-links a:hover {
+    background-color: var(--orange);
+    color: #fff;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(255, 107, 0, 0.4);
+}
+
+/* منوی اصلی سمت چپ */
 .nav-menu {
     display: flex;
     gap: 25px;
@@ -65,7 +107,6 @@ img { display: block; max-width: 100%; }
    3. بخش هدر اصلی (Hero)
    ========================================= */
 .hero {
-    /* عکس هدر با پسوند png */
     background: linear-gradient(90deg, rgba(1,18,14,0.4), rgba(1,18,14,0.9)), 
                 url('hero.png') center/cover no-repeat;
     min-height: 600px;
@@ -311,7 +352,6 @@ footer {
     margin-top: 50px;
 }
 
-/* استایل باکس شعار پایانی در صفحه قوانین */
 .highlight-box {
     background: linear-gradient(135deg, rgba(255, 107, 0, 0.15), rgba(10, 104, 73, 0.2));
     border: 1px solid var(--orange);
@@ -330,13 +370,30 @@ footer {
 }
 
 /* =========================================
-   10. واکنش‌گرا (موبایل)
+   10. واکنش‌گرا (موبایل و تبلت)
    ========================================= */
 @media (max-width: 768px) {
     .site-header {
         flex-direction: column;
         gap: 15px;
         padding: 15px;
+    }
+    
+    /* تنظیم آیکون‌ها در موبایل */
+    .header-right {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        align-items: center;
+    }
+
+    .social-links {
+        border-right: none;
+        padding-right: 0;
+        border-top: 1px solid #ffffff20;
+        padding-top: 15px;
+        width: 100%;
+        justify-content: center;
     }
     
     .nav-menu {
