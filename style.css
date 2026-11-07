@@ -16,12 +16,13 @@
     padding: 0;
 }
 
-body {
+html, body {
     background-color: var(--bg-color);
     color: var(--text-main);
     font-family: 'Vazirmatn', Tahoma, sans-serif;
     line-height: 1.8;
-    overflow-x: hidden; /* این خط مشکل نیمه باز شدن صفحه رو حل میکنه */
+    overflow-x: hidden; /* فیکس قطعی مشکل نیمه باز شدن */
+    width: 100%;
 }
 
 a { text-decoration: none; color: inherit; }
@@ -77,8 +78,6 @@ img { display: block; max-width: 100%; }
 .social-links a svg {
     width: 18px !important;
     height: 18px !important;
-    max-width: 18px !important;
-    max-height: 18px !important;
 }
 
 .social-links a:hover {
@@ -113,6 +112,7 @@ img { display: block; max-width: 100%; }
     display: flex;
     align-items: flex-end;
     padding: 60px 5%;
+    width: 100%;
 }
 
 .hero-content { max-width: 700px; }
@@ -130,6 +130,7 @@ img { display: block; max-width: 100%; }
     position: relative;
     z-index: 10;
     margin-top: -50px;
+    width: 100%;
 }
 
 .stats-container {
@@ -179,6 +180,7 @@ img { display: block; max-width: 100%; }
     gap: 40px;
     padding: 80px 5%;
     align-items: center;
+    width: 100%;
 }
 
 .about-text h2 { font-size: 36px; margin-bottom: 20px; color: var(--orange); }
@@ -198,6 +200,7 @@ img { display: block; max-width: 100%; }
     padding: 80px 5%;
     background-color: var(--bg-color);
     text-align: center;
+    width: 100%;
 }
 
 .testimonials-section h2 { font-size: 36px; margin-bottom: 10px; }
@@ -205,7 +208,7 @@ img { display: block; max-width: 100%; }
 
 .testimonials-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
     max-width: 1100px;
     margin: 0 auto;
@@ -234,7 +237,7 @@ img { display: block; max-width: 100%; }
 /* =========================================
    8. بخش گالری
    ========================================= */
-.gallery-section { padding: 80px 5%; background-color: #042b20; text-align: center; }
+.gallery-section { padding: 80px 5%; background-color: #042b20; text-align: center; width: 100%; }
 .gallery-section h2 { font-size: 36px; margin-bottom: 40px; }
 .gallery-grid {
     display: grid;
@@ -254,7 +257,7 @@ img { display: block; max-width: 100%; }
 /* =========================================
    9. بخش تماس و فوتر
    ========================================= */
-.contact { text-align: center; padding: 80px 5%; }
+.contact { text-align: center; padding: 80px 5%; width: 100%; }
 .contact h2 { font-size: 32px; margin-bottom: 15px; }
 .contact p { color: var(--text-muted); margin-bottom: 30px; }
 footer {
@@ -263,6 +266,7 @@ footer {
     padding: 20px;
     font-size: 13px;
     color: var(--text-muted);
+    width: 100%;
 }
 
 /* =========================================
@@ -301,7 +305,7 @@ footer {
 /* =========================================
    11. استایل مخصوص صفحه قوانین (Rules)
    ========================================= */
-.rules-section { padding: 80px 5%; display: flex; justify-content: center; min-height: 80vh; }
+.rules-section { padding: 80px 5%; display: flex; justify-content: center; min-height: 80vh; width: 100%; }
 .rules-container { max-width: 800px; width: 100%; }
 .rules-container h1 { font-size: 40px; color: var(--orange); text-align: center; margin-bottom: 10px; }
 .rules-container .subtitle { text-align: center; color: var(--text-muted); margin-bottom: 50px; font-size: 16px; }
@@ -331,7 +335,7 @@ footer {
 /* =========================================
    12. استایل بلیط ثبت نام (Register)
    ========================================= */
-.register-section { padding: 80px 5%; background-color: #042b20; text-align: center; }
+.register-section { padding: 80px 5%; background-color: #042b20; text-align: center; width: 100%; }
 .ticket-wrapper { display: flex; justify-content: center; align-items: center; padding: 20px; }
 .ticket {
     display: flex;
@@ -394,7 +398,6 @@ footer {
     .about-image img { height: 300px; }
     .hero { min-height: 500px; padding: 40px 5%; }
     
-    /* تنظیم بخش آمار برای موبایل */
     .stats-section { margin-top: 30px; padding: 0 5%; }
     .stats-container {
         flex-direction: column;
@@ -402,7 +405,6 @@ footer {
         padding: 25px 20px;
     }
 
-    /* اصلاح بلیط در موبایل */
     .ticket { flex-direction: column; max-width: 100%; }
     .ticket::before, .ticket::after { display: none; }
     .ticket-main { padding: 20px; }
