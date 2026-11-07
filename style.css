@@ -110,7 +110,7 @@ img { display: block; max-width: 100%; }
     display: inline-block; background-color: var(--orange);
     color: white; padding: 12px 30px; font-weight: 700;
     border-radius: 5px; transition: 0.3s; border: none; cursor: pointer;
-    font-family: inherit; font-size: 15px;
+    font-family: inherit; font-size: 15px; text-align: center;
 }
 .btn:hover { background-color: #ff8a33; transform: translateY(-3px); }
 
@@ -129,18 +129,36 @@ img { display: block; max-width: 100%; }
 }
 
 /* =========================================
-   7. بخش تجربه مهمانان و نظرسنجی
+   7. بخش دکمه‌های هدایت به نظرات
    ========================================= */
-.reviews-section { padding: 80px 5%; background-color: var(--bg-color); text-align: center; width: 100%; }
+.reviews-action-section {
+    padding: 80px 5%; background-color: var(--bg-color);
+    text-align: center; width: 100%;
+}
 .section-header h2 { font-size: 36px; margin-bottom: 10px; }
 .section-header .subtitle { color: var(--text-muted); font-size: 15px; margin-bottom: 30px; }
-.review-actions { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; flex-wrap: wrap; }
+.review-actions { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
 .outline-btn { background-color: transparent; border: 1px solid var(--orange); }
 .outline-btn:hover { background-color: var(--orange); }
 
+/* =========================================
+   8. استایل صفحات جدید (نظرات و نظرسنجی)
+   ========================================= */
+.page-container {
+    padding: 80px 5%;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.page-title { text-align: center; margin-bottom: 50px; }
+.page-title h1 { font-size: 40px; color: var(--orange); margin-bottom: 10px; }
+.page-title p { color: var(--text-muted); font-size: 16px; }
+
+/* گرید نظرات */
 .testimonials-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px; max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px; width: 100%; max-width: 1100px; margin: 0 auto;
 }
 .testimonial-card {
     background-color: var(--dark-green); border: 1px solid #ffffff1a;
@@ -156,59 +174,45 @@ img { display: block; max-width: 100%; }
 .reviewer-info strong { display: block; color: var(--orange); font-size: 16px; margin-bottom: 5px; }
 .reviewer-info span { font-size: 12px; color: var(--text-muted); }
 
-/* =========================================
-   8. مودال نظرسنجی (فرم شیشه‌ای)
-   ========================================= */
-.survey-modal {
-    display: none; position: fixed; z-index: 2000;
-    left: 0; top: 0; width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px);
-    align-items: center; justify-content: center; padding: 20px;
+/* فرم نظرسنجی */
+.survey-form-wrapper {
+    background-color: rgba(2, 26, 18, 0.6); border: 1px solid #ffffff1a;
+    padding: 40px; border-radius: 15px; width: 100%; max-width: 600px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
-.survey-modal-content {
-    background-color: rgba(2, 26, 18, 0.95); border: 1px solid #ffffff1a;
-    padding: 40px; border-radius: 15px; width: 100%; max-width: 500px;
-    position: relative; text-align: right;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-    animation: slideUp 0.4s ease-out;
-}
-@keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-.close-survey {
-    position: absolute; top: 15px; left: 20px;
-    color: var(--text-muted); font-size: 30px; font-weight: bold;
-    cursor: pointer; transition: 0.3s;
-}
-.close-survey:hover { color: var(--orange); }
-
-.survey-modal-content h3 { font-size: 24px; color: var(--orange); margin-bottom: 5px; }
-.modal-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 25px; line-height: 1.6; }
-
-.form-group { margin-bottom: 15px; }
+.form-group { margin-bottom: 20px; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
 .form-group input, .form-group textarea {
-    width: 100%; padding: 12px 15px; background-color: rgba(255, 255, 255, 0.05);
+    width: 100%; padding: 15px; background-color: rgba(255, 255, 255, 0.05);
     border: 1px solid #ffffff1a; border-radius: 8px; color: white;
-    font-family: inherit; font-size: 14px; transition: 0.3s;
+    font-family: inherit; font-size: 15px; transition: 0.3s;
 }
 .form-group input:focus, .form-group textarea:focus {
-    outline: none; border-color: var(--orange); background-color: rgba(255, 255, 255, 0.08);
+    outline: none; border-color: var(--orange); background-color: rgba(255, 255, 255, 0.1);
 }
-.form-group textarea { resize: vertical; min-height: 100px; }
+.form-group textarea { resize: vertical; min-height: 120px; }
+.submit-btn { width: 100%; margin-top: 10px; font-size: 16px; padding: 15px; }
+.success-message { text-align: center; padding: 20px; }
+.success-message p:first-child { font-size: 20px; color: #4caf50; font-weight: bold; margin-bottom: 10px; }
 
-/* استایل ستاره‌های امتیازدهی */
-.star-rating { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 5px; }
+/* استایل ستاره‌های امتیازدهی (فیکس شده) */
+.star-rating { 
+    display: flex; 
+    flex-direction: row-reverse; 
+    justify-content: flex-end; 
+    gap: 5px; 
+}
 .star-rating input { display: none; }
 .star-rating label {
-    font-size: 30px; color: #555; cursor: pointer; transition: 0.2s;
+    font-size: 35px; color: #555; cursor: pointer; transition: 0.2s;
+    line-height: 1;
 }
-.star-rating input:checked ~ label, .star-rating label:hover, .star-rating label:hover ~ label {
-    color: var(--orange); text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+.star-rating input:checked ~ label, 
+.star-rating label:hover, 
+.star-rating label:hover ~ label {
+    color: var(--orange); 
+    text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
 }
-
-.submit-btn { width: 100%; margin-top: 10px; }
-.success-message { text-align: center; padding: 20px; }
-.success-message p:first-child { font-size: 18px; color: #4caf50; font-weight: bold; margin-bottom: 10px; }
 
 /* =========================================
    9. بخش گالری
@@ -267,7 +271,7 @@ footer {
 .rule-card:hover { transform: translateX(-10px); background-color: #032016; }
 .rule-card h3 { color: var(--text-main); font-size: 22px; margin-bottom: 10px; }
 .rule-card p { color: var(--text-muted); font-size: 15px; line-height: 1.9; }
-.back-btn-container { text-align: center; margin-top: 50px; }
+.back-btn-container { text-align: center; margin-top: 50px; width: 100%; }
 .highlight-box {
     background: linear-gradient(135deg, rgba(255, 107, 0, 0.15), rgba(10, 104, 73, 0.2));
     border: 1px solid var(--orange); padding: 20px; margin-top: 30px;
@@ -349,4 +353,9 @@ footer {
     .ticket-stub-content { flex-direction: row; justify-content: center; align-items: center; gap: 20px; }
     .ticket-btn { width: auto; padding: 10px 20px; }
     .ticket-type { font-size: 11px; }
+
+    /* فرم نظرسنجی در موبایل */
+    .survey-form-wrapper { padding: 25px 20px; }
+    .form-row { grid-template-columns: 1fr; gap: 0; }
+    .star-rating label { font-size: 30px; }
 }
