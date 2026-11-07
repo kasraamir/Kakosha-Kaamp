@@ -21,7 +21,7 @@ body {
     color: var(--text-main);
     font-family: 'Vazirmatn', Tahoma, sans-serif;
     line-height: 1.8;
-    overflow-x: hidden; /* جلوگیری از اسکرول افقی */
+    overflow-x: hidden; /* این خط مشکل نیمه باز شدن صفحه رو حل میکنه */
 }
 
 a { text-decoration: none; color: inherit; }
@@ -53,7 +53,6 @@ img { display: block; max-width: 100%; }
     width: auto;
 }
 
-/* فیکس کردن آیکون‌ها */
 .social-links {
     display: flex;
     gap: 10px;
@@ -122,32 +121,34 @@ img { display: block; max-width: 100%; }
 .hero p { font-size: 16px; margin-bottom: 30px; }
 
 /* =========================================
-   4. بخش جدید: آمار و ارقام
+   4. بخش آمار و ارقام (شیشه‌ای)
    ========================================= */
 .stats-section {
+    padding: 0 5%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+    margin-top: -50px;
+}
+
+.stats-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 50px 5%;
-    background-color: var(--dark-green);
-    border-bottom: 1px solid #ffffff1a;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 30px 20px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 900px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-.stat-box {
-    text-align: center;
-}
-
-.stat-box h3 {
-    color: var(--orange);
-    font-size: 40px;
-    font-weight: 800;
-    margin-bottom: 5px;
-}
-
-.stat-box p {
-    color: var(--text-muted);
-    font-size: 15px;
-}
+.stat-box { text-align: center; }
+.stat-box h3 { color: var(--orange); font-size: 38px; font-weight: 800; margin-bottom: 5px; }
+.stat-box p { color: var(--text-muted); font-size: 14px; }
 
 /* =========================================
    5. دکمه‌ها
@@ -191,7 +192,47 @@ img { display: block; max-width: 100%; }
 }
 
 /* =========================================
-   7. بخش گالری
+   7. بخش تجربه مهمانان (نظرات)
+   ========================================= */
+.testimonials-section {
+    padding: 80px 5%;
+    background-color: var(--bg-color);
+    text-align: center;
+}
+
+.testimonials-section h2 { font-size: 36px; margin-bottom: 10px; }
+.testimonials-section .subtitle { color: var(--text-muted); font-size: 15px; margin-bottom: 50px; }
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    background-color: var(--dark-green);
+    border: 1px solid #ffffff1a;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: right;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    border-color: var(--orange);
+}
+
+.stars { color: var(--orange); font-size: 20px; margin-bottom: 15px; letter-spacing: 2px; }
+.review-text { color: var(--text-main); font-size: 15px; line-height: 1.9; margin-bottom: 20px; font-style: italic; }
+.reviewer-info strong { display: block; color: var(--orange); font-size: 16px; margin-bottom: 5px; }
+.reviewer-info span { font-size: 12px; color: var(--text-muted); }
+
+/* =========================================
+   8. بخش گالری
    ========================================= */
 .gallery-section { padding: 80px 5%; background-color: #042b20; text-align: center; }
 .gallery-section h2 { font-size: 36px; margin-bottom: 40px; }
@@ -211,7 +252,7 @@ img { display: block; max-width: 100%; }
 .gallery-grid img:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
 
 /* =========================================
-   8. بخش تماس و فوتر
+   9. بخش تماس و فوتر
    ========================================= */
 .contact { text-align: center; padding: 80px 5%; }
 .contact h2 { font-size: 32px; margin-bottom: 15px; }
@@ -225,7 +266,7 @@ footer {
 }
 
 /* =========================================
-   9. استایل پنجره باز شدن عکس (Modal)
+   10. استایل پنجره باز شدن عکس (Modal)
    ========================================= */
 .modal {
     display: none;
@@ -258,7 +299,7 @@ footer {
 @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
 /* =========================================
-   10. استایل مخصوص صفحه قوانین (Rules)
+   11. استایل مخصوص صفحه قوانین (Rules)
    ========================================= */
 .rules-section { padding: 80px 5%; display: flex; justify-content: center; min-height: 80vh; }
 .rules-container { max-width: 800px; width: 100%; }
@@ -288,7 +329,7 @@ footer {
 .highlight-box p { color: var(--orange); font-size: 18px; font-weight: 800; margin: 0; }
 
 /* =========================================
-   11. استایل بلیط ثبت نام (Register)
+   12. استایل بلیط ثبت نام (Register)
    ========================================= */
 .register-section { padding: 80px 5%; background-color: #042b20; text-align: center; }
 .ticket-wrapper { display: flex; justify-content: center; align-items: center; padding: 20px; }
@@ -339,7 +380,7 @@ footer {
 .ticket-btn { padding: 8px 10px; font-size: 12px; width: 100%; }
 
 /* =========================================
-   12. واکنش‌گرا (موبایل)
+   13. واکنش‌گرا (موبایل)
    ========================================= */
 @media (max-width: 768px) {
     .site-header { flex-direction: column; gap: 15px; padding: 15px; }
@@ -354,10 +395,11 @@ footer {
     .hero { min-height: 500px; padding: 40px 5%; }
     
     /* تنظیم بخش آمار برای موبایل */
-    .stats-section {
+    .stats-section { margin-top: 30px; padding: 0 5%; }
+    .stats-container {
         flex-direction: column;
-        gap: 30px;
-        padding: 40px 5%;
+        gap: 20px;
+        padding: 25px 20px;
     }
 
     /* اصلاح بلیط در موبایل */
