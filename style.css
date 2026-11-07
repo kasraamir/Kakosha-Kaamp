@@ -21,7 +21,7 @@ html, body {
     color: var(--text-main);
     font-family: 'Vazirmatn', Tahoma, sans-serif;
     line-height: 1.8;
-    overflow-x: hidden; /* فیکس قطعی مشکل نیمه باز شدن */
+    overflow-x: hidden;
     width: 100%;
 }
 
@@ -43,64 +43,32 @@ img { display: block; max-width: 100%; }
     border-bottom: 1px solid #ffffff1a;
 }
 
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-}
-
-.logo img {
-    height: 45px;
-    width: auto;
-}
+.header-right { display: flex; align-items: center; gap: 25px; }
+.logo img { height: 45px; width: auto; }
 
 .social-links {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    border-right: 1px solid #ffffff20;
-    padding-right: 20px;
+    display: flex; gap: 10px; align-items: center;
+    border-right: 1px solid #ffffff20; padding-right: 20px;
 }
 
 .social-links a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px; border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.08);
-    color: var(--text-muted) !important;
-    transition: all 0.3s ease;
+    color: var(--text-muted) !important; transition: all 0.3s ease;
     border: 1px solid transparent;
 }
 
-.social-links a svg {
-    width: 18px !important;
-    height: 18px !important;
-}
+.social-links a svg { width: 18px !important; height: 18px !important; }
 
 .social-links a:hover {
-    background-color: var(--orange);
-    color: #fff !important;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(255, 107, 0, 0.4);
+    background-color: var(--orange); color: #fff !important;
+    transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 107, 0, 0.4);
 }
 
-.nav-menu {
-    display: flex;
-    gap: 25px;
-}
-
-.nav-menu a {
-    font-size: 15px;
-    font-weight: 700;
-    transition: color 0.3s;
-}
-
-.nav-menu a:hover {
-    color: var(--orange);
-}
+.nav-menu { display: flex; gap: 25px; }
+.nav-menu a { font-size: 15px; font-weight: 700; transition: color 0.3s; }
+.nav-menu a:hover { color: var(--orange); }
 
 /* =========================================
    3. بخش هدر اصلی (Hero)
@@ -108,11 +76,8 @@ img { display: block; max-width: 100%; }
 .hero {
     background: linear-gradient(90deg, rgba(1,18,14,0.4), rgba(1,18,14,0.9)), 
                 url('hero.png') center/cover no-repeat;
-    min-height: 600px;
-    display: flex;
-    align-items: flex-end;
-    padding: 60px 5%;
-    width: 100%;
+    min-height: 600px; display: flex; align-items: flex-end;
+    padding: 60px 5%; width: 100%;
 }
 
 .hero-content { max-width: 700px; }
@@ -121,32 +86,19 @@ img { display: block; max-width: 100%; }
 .hero p { font-size: 16px; margin-bottom: 30px; }
 
 /* =========================================
-   4. بخش آمار و ارقام (شیشه‌ای)
+   4. بخش آمار و ارقام
    ========================================= */
 .stats-section {
-    padding: 0 5%;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    z-index: 10;
-    margin-top: -50px;
-    width: 100%;
+    padding: 0 5%; display: flex; justify-content: center;
+    position: relative; z-index: 10; margin-top: -50px; width: 100%;
 }
-
 .stats-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 30px 20px;
-    border-radius: 15px;
-    width: 100%;
-    max-width: 900px;
+    display: flex; justify-content: space-around; align-items: center;
+    background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1); padding: 30px 20px;
+    border-radius: 15px; width: 100%; max-width: 900px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
-
 .stat-box { text-align: center; }
 .stat-box h3 { color: var(--orange); font-size: 38px; font-weight: 800; margin-bottom: 5px; }
 .stat-box p { color: var(--text-muted); font-size: 14px; }
@@ -155,166 +107,161 @@ img { display: block; max-width: 100%; }
    5. دکمه‌ها
    ========================================= */
 .btn {
-    display: inline-block;
-    background-color: var(--orange);
-    color: white;
-    padding: 12px 30px;
-    font-weight: 700;
-    border-radius: 5px;
-    transition: 0.3s;
-    border: none;
-    cursor: pointer;
+    display: inline-block; background-color: var(--orange);
+    color: white; padding: 12px 30px; font-weight: 700;
+    border-radius: 5px; transition: 0.3s; border: none; cursor: pointer;
+    font-family: inherit; font-size: 15px;
 }
-
-.btn:hover {
-    background-color: #ff8a33;
-    transform: translateY(-3px);
-}
+.btn:hover { background-color: #ff8a33; transform: translateY(-3px); }
 
 /* =========================================
    6. بخش درباره ما
    ========================================= */
 .about {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    padding: 80px 5%;
-    align-items: center;
-    width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 40px; padding: 80px 5%; align-items: center; width: 100%;
 }
-
 .about-text h2 { font-size: 36px; margin-bottom: 20px; color: var(--orange); }
 .about-text p { color: var(--text-muted); font-size: 15px; line-height: 2; }
 .about-image img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 10px;
-    border: 5px solid #163d25;
+    width: 100%; height: 400px; object-fit: cover;
+    border-radius: 10px; border: 5px solid #163d25;
 }
 
 /* =========================================
-   7. بخش تجربه مهمانان (نظرات)
+   7. بخش تجربه مهمانان و نظرسنجی
    ========================================= */
-.testimonials-section {
-    padding: 80px 5%;
-    background-color: var(--bg-color);
-    text-align: center;
-    width: 100%;
-}
-
-.testimonials-section h2 { font-size: 36px; margin-bottom: 10px; }
-.testimonials-section .subtitle { color: var(--text-muted); font-size: 15px; margin-bottom: 50px; }
+.reviews-section { padding: 80px 5%; background-color: var(--bg-color); text-align: center; width: 100%; }
+.section-header h2 { font-size: 36px; margin-bottom: 10px; }
+.section-header .subtitle { color: var(--text-muted); font-size: 15px; margin-bottom: 30px; }
+.review-actions { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; flex-wrap: wrap; }
+.outline-btn { background-color: transparent; border: 1px solid var(--orange); }
+.outline-btn:hover { background-color: var(--orange); }
 
 .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-    max-width: 1100px;
-    margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px; max-width: 1100px; margin: 0 auto;
 }
-
 .testimonial-card {
-    background-color: var(--dark-green);
-    border: 1px solid #ffffff1a;
-    border-radius: 12px;
-    padding: 30px;
-    text-align: right;
+    background-color: var(--dark-green); border: 1px solid #ffffff1a;
+    border-radius: 12px; padding: 30px; text-align: right;
     transition: transform 0.3s, box-shadow 0.3s;
 }
-
 .testimonial-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.4);
     border-color: var(--orange);
 }
-
 .stars { color: var(--orange); font-size: 20px; margin-bottom: 15px; letter-spacing: 2px; }
 .review-text { color: var(--text-main); font-size: 15px; line-height: 1.9; margin-bottom: 20px; font-style: italic; }
 .reviewer-info strong { display: block; color: var(--orange); font-size: 16px; margin-bottom: 5px; }
 .reviewer-info span { font-size: 12px; color: var(--text-muted); }
 
 /* =========================================
-   8. بخش گالری
+   8. مودال نظرسنجی (فرم شیشه‌ای)
+   ========================================= */
+.survey-modal {
+    display: none; position: fixed; z-index: 2000;
+    left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px);
+    align-items: center; justify-content: center; padding: 20px;
+}
+.survey-modal-content {
+    background-color: rgba(2, 26, 18, 0.95); border: 1px solid #ffffff1a;
+    padding: 40px; border-radius: 15px; width: 100%; max-width: 500px;
+    position: relative; text-align: right;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    animation: slideUp 0.4s ease-out;
+}
+@keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.close-survey {
+    position: absolute; top: 15px; left: 20px;
+    color: var(--text-muted); font-size: 30px; font-weight: bold;
+    cursor: pointer; transition: 0.3s;
+}
+.close-survey:hover { color: var(--orange); }
+
+.survey-modal-content h3 { font-size: 24px; color: var(--orange); margin-bottom: 5px; }
+.modal-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 25px; line-height: 1.6; }
+
+.form-group { margin-bottom: 15px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.form-group input, .form-group textarea {
+    width: 100%; padding: 12px 15px; background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid #ffffff1a; border-radius: 8px; color: white;
+    font-family: inherit; font-size: 14px; transition: 0.3s;
+}
+.form-group input:focus, .form-group textarea:focus {
+    outline: none; border-color: var(--orange); background-color: rgba(255, 255, 255, 0.08);
+}
+.form-group textarea { resize: vertical; min-height: 100px; }
+
+/* استایل ستاره‌های امتیازدهی */
+.star-rating { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 5px; }
+.star-rating input { display: none; }
+.star-rating label {
+    font-size: 30px; color: #555; cursor: pointer; transition: 0.2s;
+}
+.star-rating input:checked ~ label, .star-rating label:hover, .star-rating label:hover ~ label {
+    color: var(--orange); text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+}
+
+.submit-btn { width: 100%; margin-top: 10px; }
+.success-message { text-align: center; padding: 20px; }
+.success-message p:first-child { font-size: 18px; color: #4caf50; font-weight: bold; margin-bottom: 10px; }
+
+/* =========================================
+   9. بخش گالری
    ========================================= */
 .gallery-section { padding: 80px 5%; background-color: #042b20; text-align: center; width: 100%; }
 .gallery-section h2 { font-size: 36px; margin-bottom: 40px; }
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-}
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
 .gallery-grid img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-    transition: 0.3s;
-    cursor: pointer;
+    width: 100%; height: 200px; object-fit: cover;
+    border-radius: 8px; transition: 0.3s; cursor: pointer;
 }
 .gallery-grid img:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
 
 /* =========================================
-   9. بخش تماس و فوتر
+   10. بخش تماس و فوتر
    ========================================= */
 .contact { text-align: center; padding: 80px 5%; width: 100%; }
 .contact h2 { font-size: 32px; margin-bottom: 15px; }
 .contact p { color: var(--text-muted); margin-bottom: 30px; }
 footer {
-    background-color: var(--dark-green);
-    text-align: center;
-    padding: 20px;
-    font-size: 13px;
-    color: var(--text-muted);
-    width: 100%;
+    background-color: var(--dark-green); text-align: center;
+    padding: 20px; font-size: 13px; color: var(--text-muted); width: 100%;
 }
 
 /* =========================================
-   10. استایل پنجره باز شدن عکس (Modal)
+   11. مودال عکس (گالری)
    ========================================= */
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(5px);
+    display: none; position: fixed; z-index: 1000; left: 0; top: 0;
+    width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.9);
+    align-items: center; justify-content: center; backdrop-filter: blur(5px);
 }
 .modal-content {
-    max-width: 90%;
-    max-height: 85vh;
-    border-radius: 10px;
-    box-shadow: 0 0 30px rgba(255, 107, 0, 0.3);
-    animation: zoomIn 0.3s ease;
+    max-width: 90%; max-height: 85vh; border-radius: 10px;
+    box-shadow: 0 0 30px rgba(255, 107, 0, 0.3); animation: zoomIn 0.3s ease;
 }
 .close-modal {
-    position: absolute;
-    top: 20px; left: 30px;
-    color: #fff;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
+    position: absolute; top: 20px; left: 30px; color: #fff;
+    font-size: 40px; font-weight: bold; cursor: pointer; transition: 0.3s;
 }
 .close-modal:hover { color: var(--orange); }
 @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
 /* =========================================
-   11. استایل مخصوص صفحه قوانین (Rules)
+   12. استایل مخصوص صفحه قوانین (Rules)
    ========================================= */
 .rules-section { padding: 80px 5%; display: flex; justify-content: center; min-height: 80vh; width: 100%; }
 .rules-container { max-width: 800px; width: 100%; }
 .rules-container h1 { font-size: 40px; color: var(--orange); text-align: center; margin-bottom: 10px; }
 .rules-container .subtitle { text-align: center; color: var(--text-muted); margin-bottom: 50px; font-size: 16px; }
 .rule-card {
-    background-color: var(--dark-green);
-    border-right: 5px solid var(--orange);
-    padding: 25px 30px;
-    margin-bottom: 20px;
-    border-radius: 8px;
+    background-color: var(--dark-green); border-right: 5px solid var(--orange);
+    padding: 25px 30px; margin-bottom: 20px; border-radius: 8px;
     transition: transform 0.3s, background-color 0.3s;
 }
 .rule-card:hover { transform: translateX(-10px); background-color: #032016; }
@@ -323,30 +270,20 @@ footer {
 .back-btn-container { text-align: center; margin-top: 50px; }
 .highlight-box {
     background: linear-gradient(135deg, rgba(255, 107, 0, 0.15), rgba(10, 104, 73, 0.2));
-    border: 1px solid var(--orange);
-    padding: 20px;
-    margin-top: 30px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border: 1px solid var(--orange); padding: 20px; margin-top: 30px;
+    border-radius: 8px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 .highlight-box p { color: var(--orange); font-size: 18px; font-weight: 800; margin: 0; }
 
 /* =========================================
-   12. استایل بلیط ثبت نام (Register)
+   13. استایل بلیط ثبت نام (Register)
    ========================================= */
 .register-section { padding: 80px 5%; background-color: #042b20; text-align: center; width: 100%; }
 .ticket-wrapper { display: flex; justify-content: center; align-items: center; padding: 20px; }
 .ticket {
-    display: flex;
-    background-color: #0b3024;
-    border-radius: 12px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    max-width: 700px;
-    width: 100%;
-    position: relative;
-    border: 1px solid #ffffff1a;
-    overflow: hidden;
+    display: flex; background-color: #0b3024; border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5); max-width: 700px; width: 100%;
+    position: relative; border: 1px solid #ffffff1a; overflow: hidden;
 }
 .ticket::before {
     content: ""; position: absolute; right: 25%; top: 10px; bottom: 10px;
@@ -384,7 +321,7 @@ footer {
 .ticket-btn { padding: 8px 10px; font-size: 12px; width: 100%; }
 
 /* =========================================
-   13. واکنش‌گرا (موبایل)
+   14. واکنش‌گرا (موبایل)
    ========================================= */
 @media (max-width: 768px) {
     .site-header { flex-direction: column; gap: 15px; padding: 15px; }
@@ -399,11 +336,7 @@ footer {
     .hero { min-height: 500px; padding: 40px 5%; }
     
     .stats-section { margin-top: 30px; padding: 0 5%; }
-    .stats-container {
-        flex-direction: column;
-        gap: 20px;
-        padding: 25px 20px;
-    }
+    .stats-container { flex-direction: column; gap: 20px; padding: 25px 20px; }
 
     .ticket { flex-direction: column; max-width: 100%; }
     .ticket::before, .ticket::after { display: none; }
