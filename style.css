@@ -161,7 +161,6 @@ img { display: block; max-width: 100%; }
 .page-title h1 { font-size: 40px; color: var(--orange); margin-bottom: 10px; }
 .page-title p { color: var(--text-muted); font-size: 16px; }
 
-/* گرید نظرات */
 .testimonials-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px; width: 100%; max-width: 1100px; margin: 0 auto;
@@ -180,7 +179,6 @@ img { display: block; max-width: 100%; }
 .reviewer-info strong { display: block; color: var(--orange); font-size: 16px; margin-bottom: 5px; }
 .reviewer-info span { font-size: 12px; color: var(--text-muted); }
 
-/* فرم نظرسنجی */
 .survey-form-wrapper {
     background: rgba(2, 26, 18, 0.7); border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(15px); padding: 45px 35px; border-radius: 20px;
@@ -203,7 +201,6 @@ img { display: block; max-width: 100%; }
 .success-message { text-align: center; padding: 30px 10px; }
 .success-message p:first-child { font-size: 22px; color: #4caf50; font-weight: bold; margin-bottom: 10px; }
 
-/* ستاره‌های امتیازدهی */
 .star-rating { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 8px; }
 .star-rating input { display: none; }
 .star-rating label { font-size: 38px; color: #444; cursor: pointer; transition: 0.2s; line-height: 1; }
@@ -212,77 +209,112 @@ img { display: block; max-width: 100%; }
 }
 
 /* =========================================
-   9. بخش جدید: سوالات متداول (FAQ)
+   9. بخش جدید: سوالات متداول (FAQ) - طراحی پرمیوم
    ========================================= */
 .faq-section {
     padding: 80px 5%;
-    background-color: var(--bg-color);
+    background-color: #042b20; /* رنگ کمی روشن‌تر برای تفکیک بخش */
     text-align: center;
     width: 100%;
 }
 
-.faq-container {
+.faq-wrapper {
     max-width: 800px;
     margin: 0 auto;
     text-align: right;
+    background: rgba(0, 0, 0, 0.2); /* باکس شیشه‌ای تیره */
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
 .faq-item {
     background-color: var(--dark-green);
     border: 1px solid #ffffff1a;
-    border-radius: 10px;
+    border-radius: 12px;
     margin-bottom: 15px;
-    padding: 20px;
     transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.faq-item:last-child {
+    margin-bottom: 0;
+}
+
+.faq-item:hover {
+    border-color: rgba(255, 107, 0, 0.5);
+    background-color: #032016;
 }
 
 .faq-item[open] {
     border-color: var(--orange);
-    box-shadow: 0 5px 15px rgba(255, 107, 0, 0.1);
+    background-color: #042b20;
+    box-shadow: 0 8px 25px rgba(255, 107, 0, 0.15);
 }
 
 .faq-item summary {
     font-weight: 700;
-    font-size: 16px;
+    font-size: 17px;
     color: var(--text-main);
     cursor: pointer;
     list-style: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 22px 25px;
     outline: none;
+    transition: color 0.3s;
 }
 
-/* حذف فلش پیش‌فرض مرورگر */
+.faq-item:hover summary {
+    color: var(--orange);
+}
+
+/* حذف فلش پیش‌فرض */
 .faq-item summary::-webkit-details-marker { display: none; }
 
-/* اضافه کردن آیکون پلاس و منفی */
+/* آیکون دایره‌ای شیک */
 .faq-item summary::after {
     content: '+';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 107, 0, 0.1);
     color: var(--orange);
-    font-size: 26px;
+    border-radius: 50%;
+    font-size: 22px;
     font-weight: 300;
-    transition: transform 0.3s;
+    transition: all 0.4s ease;
 }
 
 .faq-item[open] summary::after {
-    content: '−';
-    transform: rotate(180deg);
+    content: '+'; /* محتوا رو نگه می‌داریم ولی با چرخش به ضربدر تبدیل میشه */
+    transform: rotate(135deg); /* چرخش برای تبدیل + به x */
+    background-color: var(--orange);
+    color: #fff;
 }
 
 .faq-item p {
     color: var(--text-muted);
-    font-size: 14px;
-    line-height: 1.9;
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid #ffffff1a;
+    font-size: 15px;
+    line-height: 2;
+    padding: 0 25px 25px 25px;
+    margin: 0;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* =========================================
    10. بخش گالری
    ========================================= */
-.gallery-section { padding: 80px 5%; background-color: #042b20; text-align: center; width: 100%; }
+.gallery-section { padding: 80px 5%; background-color: var(--bg-color); text-align: center; width: 100%; }
 .gallery-section h2 { font-size: 36px; margin-bottom: 40px; }
 .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
 .gallery-grid img {
@@ -416,8 +448,10 @@ footer {
     .star-rating { justify-content: center; }
 
     /* فیکس سوالات متداول در موبایل */
-    .faq-item summary { font-size: 15px; }
-    .faq-item p { font-size: 13px; }
+    .faq-wrapper { padding: 15px; }
+    .faq-item summary { padding: 18px 20px; font-size: 15px; }
+    .faq-item p { padding: 0 20px 20px 20px; font-size: 14px; }
+    .faq-item summary::after { width: 26px; height: 26px; font-size: 18px; }
 
     .ticket { flex-direction: column; max-width: 100%; }
     .ticket::before, .ticket::after { display: none; }
