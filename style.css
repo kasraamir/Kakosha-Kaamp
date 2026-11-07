@@ -41,7 +41,6 @@ img { display: block; max-width: 100%; }
     border-bottom: 1px solid #ffffff1a;
 }
 
-/* بخش راست هدر (لوگو + آیکون‌ها) */
 .header-right {
     display: flex;
     align-items: center;
@@ -53,7 +52,7 @@ img { display: block; max-width: 100%; }
     width: auto;
 }
 
-/* استایل آیکون‌های شیشه‌ای شبکه‌های اجتماعی */
+/* استایل آیکون‌های شیشه‌ای */
 .social-links {
     display: flex;
     gap: 10px;
@@ -69,8 +68,8 @@ img { display: block; max-width: 100%; }
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.05);
-    color: var(--text-muted);
+    background-color: #ffffff10; /* پس‌زمینه ثابت شیشه‌ای */
+    color: #ffffff; /* رنگ آیکون همیشه سفید */
     transition: all 0.3s ease;
     border: 1px solid transparent;
 }
@@ -82,12 +81,11 @@ img { display: block; max-width: 100%; }
 
 .social-links a:hover {
     background-color: var(--orange);
-    color: #fff;
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 5px 15px rgba(255, 107, 0, 0.4);
 }
 
-/* منوی اصلی سمت چپ */
+/* منوی اصلی */
 .nav-menu {
     display: flex;
     gap: 25px;
@@ -370,7 +368,7 @@ footer {
 }
 
 /* =========================================
-   10. واکنش‌گرا (موبایل و تبلت)
+   10. واکنش‌گرا (موبایل)
    ========================================= */
 @media (max-width: 768px) {
     .site-header {
@@ -379,7 +377,6 @@ footer {
         padding: 15px;
     }
     
-    /* تنظیم آیکون‌ها در موبایل */
     .header-right {
         flex-direction: column;
         gap: 15px;
