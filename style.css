@@ -129,7 +129,7 @@ img { display: block; max-width: 100%; }
 }
 
 /* =========================================
-   7. بخش دکمه‌های هدایت به نظرات (کادر شیشه‌ای)
+   7. بخش دکمه‌های هدایت به نظرات
    ========================================= */
 .reviews-action-section {
     padding: 80px 5%; background-color: var(--bg-color);
@@ -180,63 +180,107 @@ img { display: block; max-width: 100%; }
 .reviewer-info strong { display: block; color: var(--orange); font-size: 16px; margin-bottom: 5px; }
 .reviewer-info span { font-size: 12px; color: var(--text-muted); }
 
-/* =========================================
-   فرم نظرسنجی (طراحی شیشه‌ای و مدرن)
-   ========================================= */
+/* فرم نظرسنجی */
 .survey-form-wrapper {
     background: rgba(2, 26, 18, 0.7); border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(15px); padding: 45px 35px; border-radius: 20px;
     width: 100%; max-width: 600px; box-shadow: 0 25px 50px rgba(0,0,0,0.6);
 }
-
 .form-group { margin-bottom: 20px; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-
-/* فیکس کردن رنگ سفید زشت اینپوت‌ها */
 .form-group input, .form-group textarea {
-    width: 100%; padding: 15px 18px; 
-    background-color: rgba(0, 0, 0, 0.4) !important; /* رنگ تیره */
-    border: 1px solid rgba(255, 255, 255, 0.15); 
-    border-radius: 10px; color: #fff;
+    width: 100%; padding: 15px 18px; background-color: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 10px; color: #fff;
     font-family: inherit; font-size: 15px; transition: 0.3s;
 }
-
-.form-group input::placeholder, .form-group textarea::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-}
-
+.form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255, 255, 255, 0.5); }
 .form-group input:focus, .form-group textarea:focus {
-    outline: none; border-color: var(--orange); 
-    background-color: rgba(0, 0, 0, 0.6) !important;
+    outline: none; border-color: var(--orange); background-color: rgba(0, 0, 0, 0.6) !important;
     box-shadow: 0 0 10px rgba(255, 107, 0, 0.2);
 }
 .form-group textarea { resize: vertical; min-height: 120px; }
-
 .submit-btn { width: 100%; margin-top: 10px; font-size: 16px; padding: 15px; border-radius: 10px; }
 .success-message { text-align: center; padding: 30px 10px; }
 .success-message p:first-child { font-size: 22px; color: #4caf50; font-weight: bold; margin-bottom: 10px; }
 
-/* استایل ستاره‌های امتیازدهی */
-.star-rating { 
-    display: flex; 
-    flex-direction: row-reverse; 
-    justify-content: flex-end; 
-    gap: 8px; 
-}
+/* ستاره‌های امتیازدهی */
+.star-rating { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 8px; }
 .star-rating input { display: none; }
-.star-rating label {
-    font-size: 38px; color: #444; cursor: pointer; transition: 0.2s;
-    line-height: 1;
-}
-.star-rating input:checked ~ label, 
-.star-rating label:hover, 
-.star-rating label:hover ~ label {
-    color: var(--orange); 
-    text-shadow: 0 0 15px rgba(255, 107, 0, 0.6);
+.star-rating label { font-size: 38px; color: #444; cursor: pointer; transition: 0.2s; line-height: 1; }
+.star-rating input:checked ~ label, .star-rating label:hover, .star-rating label:hover ~ label {
+    color: var(--orange); text-shadow: 0 0 15px rgba(255, 107, 0, 0.6);
 }
 
 /* =========================================
-   9. بخش گالری
+   9. بخش جدید: سوالات متداول (FAQ)
+   ========================================= */
+.faq-section {
+    padding: 80px 5%;
+    background-color: var(--bg-color);
+    text-align: center;
+    width: 100%;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: right;
+}
+
+.faq-item {
+    background-color: var(--dark-green);
+    border: 1px solid #ffffff1a;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.faq-item[open] {
+    border-color: var(--orange);
+    box-shadow: 0 5px 15px rgba(255, 107, 0, 0.1);
+}
+
+.faq-item summary {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--text-main);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    outline: none;
+}
+
+/* حذف فلش پیش‌فرض مرورگر */
+.faq-item summary::-webkit-details-marker { display: none; }
+
+/* اضافه کردن آیکون پلاس و منفی */
+.faq-item summary::after {
+    content: '+';
+    color: var(--orange);
+    font-size: 26px;
+    font-weight: 300;
+    transition: transform 0.3s;
+}
+
+.faq-item[open] summary::after {
+    content: '−';
+    transform: rotate(180deg);
+}
+
+.faq-item p {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.9;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #ffffff1a;
+}
+
+/* =========================================
+   10. بخش گالری
    ========================================= */
 .gallery-section { padding: 80px 5%; background-color: #042b20; text-align: center; width: 100%; }
 .gallery-section h2 { font-size: 36px; margin-bottom: 40px; }
@@ -248,7 +292,7 @@ img { display: block; max-width: 100%; }
 .gallery-grid img:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
 
 /* =========================================
-   10. بخش تماس و فوتر
+   11. بخش تماس و فوتر
    ========================================= */
 .contact { text-align: center; padding: 80px 5%; width: 100%; }
 .contact h2 { font-size: 32px; margin-bottom: 15px; }
@@ -259,7 +303,7 @@ footer {
 }
 
 /* =========================================
-   11. مودال عکس (گالری)
+   12. مودال عکس (گالری)
    ========================================= */
 .modal {
     display: none; position: fixed; z-index: 1000; left: 0; top: 0;
@@ -278,7 +322,7 @@ footer {
 @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
 /* =========================================
-   12. استایل مخصوص صفحه قوانین (Rules)
+   13. استایل مخصوص صفحه قوانین (Rules)
    ========================================= */
 .rules-section { padding: 80px 5%; display: flex; justify-content: center; min-height: 80vh; width: 100%; }
 .rules-container { max-width: 800px; width: 100%; }
@@ -301,7 +345,7 @@ footer {
 .highlight-box p { color: var(--orange); font-size: 18px; font-weight: 800; margin: 0; }
 
 /* =========================================
-   13. استایل بلیط ثبت نام (Register)
+   14. استایل بلیط ثبت نام (Register)
    ========================================= */
 .register-section { padding: 80px 5%; background-color: #042b20; text-align: center; width: 100%; }
 .ticket-wrapper { display: flex; justify-content: center; align-items: center; padding: 20px; }
@@ -346,7 +390,7 @@ footer {
 .ticket-btn { padding: 8px 10px; font-size: 12px; width: 100%; }
 
 /* =========================================
-   14. واکنش‌گرا (موبایل)
+   15. واکنش‌گرا (موبایل)
    ========================================= */
 @media (max-width: 768px) {
     .site-header { flex-direction: column; gap: 15px; padding: 15px; }
@@ -363,15 +407,17 @@ footer {
     .stats-section { margin-top: 30px; padding: 0 5%; }
     .stats-container { flex-direction: column; gap: 20px; padding: 25px 20px; }
 
-    /* فیکس دکمه‌های نظرات در موبایل */
     .review-action-card { flex-direction: column; width: 100%; padding: 20px; }
     .review-action-card .btn { width: 100%; }
 
-    /* فیکس فرم در موبایل */
     .survey-form-wrapper { padding: 30px 20px; }
     .form-row { grid-template-columns: 1fr; gap: 0; }
     .star-rating label { font-size: 32px; }
     .star-rating { justify-content: center; }
+
+    /* فیکس سوالات متداول در موبایل */
+    .faq-item summary { font-size: 15px; }
+    .faq-item p { font-size: 13px; }
 
     .ticket { flex-direction: column; max-width: 100%; }
     .ticket::before, .ticket::after { display: none; }
