@@ -10,22 +10,27 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
     <style>
-        /* استایل اختصاصی گردونه چرخشی */
+        /* =========================================
+           استایل اختصاصی گردونه چرخشی
+           ========================================= */
         .wheel-wrapper {
             position: relative;
-            width: 300px;
-            height: 300px;
+            width: 320px; /* کمی بزرگتر شد */
+            height: 320px;
             margin: 30px auto;
+            /* سایه و درخشش دور گردونه */
+            filter: drop-shadow(0 0 20px rgba(255, 107, 0, 0.2));
         }
 
+        /* دکمه وسط گردونه */
         .wheel-center-btn {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            background-color: var(--orange);
+            width: 85px;
+            height: 85px;
+            background: radial-gradient(circle, #ff8a33, #ff6b00);
             color: white;
             border-radius: 50%;
             display: flex;
@@ -35,69 +40,93 @@
             font-size: 16px;
             cursor: pointer;
             z-index: 10;
-            box-shadow: 0 0 20px rgba(255, 107, 0, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.5);
-            transition: transform 0.2s, background-color 0.2s;
-            border: 3px solid #fff;
+            box-shadow: 0 0 25px rgba(255, 107, 0, 0.8), inset 0 -3px 10px rgba(0,0,0,0.3), inset 0 3px 10px rgba(255,255,255,0.5);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 4px solid #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .wheel-center-btn:hover {
             transform: translate(-50%, -50%) scale(1.05);
-            background-color: #ff8a33;
+            box-shadow: 0 0 35px rgba(255, 107, 0, 1), inset 0 -3px 10px rgba(0,0,0,0.3), inset 0 3px 10px rgba(255,255,255,0.5);
         }
 
+        /* نشانگر بالا */
         .wheel-pointer {
             position: absolute;
-            top: -20px;
+            top: -25px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-top: 30px solid var(--orange);
+            border-left: 18px solid transparent;
+            border-right: 18px solid transparent;
+            border-top: 35px solid var(--orange);
             z-index: 20;
-            filter: drop-shadow(0 4px 4px rgba(0,0,0,0.5));
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
+        }
+        
+        /* نقطه دایره‌ای وسط نشانگر */
+        .wheel-pointer::after {
+            content: '';
+            position: absolute;
+            top: -35px;
+            left: -10px;
+            width: 20px;
+            height: 20px;
+            background: var(--orange);
+            border-radius: 50%;
+            border: 3px solid #fff;
         }
 
+        /* کانتینر گردونه */
         #wheel {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            border: 5px solid #fff;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            border: 6px solid #fff;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,0,0,0.5);
             position: relative;
             overflow: hidden;
             transition: transform 5s cubic-bezier(0.17, 0.67, 0.1, 1);
             transform: rotate(0deg);
+            background-color: #03251b;
         }
 
+        /* خونه‌های گردونه */
         .wheel-slice {
             position: absolute;
             width: 50%;
             height: 50%;
             transform-origin: bottom right;
-            background-color: #0b3024;
             left: 0;
             top: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            /* خط جدا کننده طلایی/نارنجی */
+            border-right: 2px solid rgba(255, 107, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        /* متن روی خونه‌ها */
         .wheel-text-span {
             position: absolute;
-            left: 20%;
-            top: 40%;
-            transform: rotate(90deg);
-            font-size: 14px;
-            font-weight: bold;
-            color: white;
-            width: 100px;
+            left: 15%; /* فاصله از مرکز */
+            top: 45%;
+            /* چرخش متن برای خوانایی */
+            transform: rotate(90deg); 
+            font-size: 13px;
+            font-weight: 800;
+            color: #fff;
+            width: 90px;
             text-align: center;
             pointer-events: none;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            letter-spacing: 0.5px;
         }
 
+        /* زاویه هر خونه (۳۶ درجه) */
         .slice-0 { transform: rotate(0deg) skewY(-54deg); }
         .slice-1 { transform: rotate(36deg) skewY(-54deg); }
         .slice-2 { transform: rotate(72deg) skewY(-54deg); }
@@ -109,14 +138,27 @@
         .slice-8 { transform: rotate(288deg) skewY(-54deg); }
         .slice-9 { transform: rotate(324deg) skewY(-54deg); }
 
-        .slice-0, .slice-2, .slice-4, .slice-6, .slice-8 { background-color: #0b3024; }
-        .slice-1, .slice-3, .slice-5, .slice-7, .slice-9 { background-color: #1a4a3a; }
+        /* رنگ‌های گردونه (یک در میان) */
+        .slice-0, .slice-2, .slice-4, .slice-6, .slice-8 { background: linear-gradient(135deg, #0b3024, #042b20); }
+        .slice-1, .slice-3, .slice-5, .slice-7, .slice-9 { background: linear-gradient(135deg, #1a4a3a, #0a6849); }
 
+        /* فیکس کردن متن‌ها بعد از اسکیو شدن */
         .wheel-text-span span {
             transform: skewY(54deg) rotate(45deg);
             display: block;
-            margin-top: 20px;
-            margin-right: 10px;
+            margin-top: 25px;
+            margin-right: 5px;
+        }
+
+        /* استایل جعبه جایزه */
+        .prize-box {
+            margin-top: 25px; 
+            padding: 25px; 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 107, 0, 0.4); 
+            border-radius: 15px; 
+            animation: zoomIn 0.5s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
     </style>
 </head>
@@ -134,11 +176,11 @@
     </header>
 
     <main>
-        <section class="page-container" style="justify-content: center;">
+        <section class="page-container" style="justify-content: center; padding-top: 40px;">
             <div class="wheel-container" style="text-align: center; background: rgba(2, 26, 18, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); padding: 40px 20px; border-radius: 20px; box-shadow: 0 25px 50px rgba(0,0,0,0.6); max-width: 400px; width: 100%;">
                 
-                <h1 class="wheel-title" style="color: var(--orange); font-size: 28px; margin-bottom: 10px;">گردونه شانس</h1>
-                <p class="wheel-subtitle" style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">شانستو امتحان کن!</p>
+                <h1 class="wheel-title" style="color: var(--orange); font-size: 28px; margin-bottom: 5px;">گردونه شانس</h1>
+                <p class="wheel-subtitle" style="color: var(--text-muted); font-size: 14px; margin-bottom: 30px;">شانستو امتحان کن!</p>
                 
                 <div class="wheel-wrapper">
                     <div class="wheel-pointer"></div>
@@ -146,8 +188,9 @@
                     <div class="wheel-center-btn" id="spinBtn">بچرخون!</div>
                 </div>
 
-                <div id="prizeMessage" style="display: none; margin-top: 20px; padding: 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 107, 0, 0.3); border-radius: 15px; animation: zoomIn 0.5s ease;">
-                    <h3 id="prizeText" style="font-size: 20px; margin-bottom: 10px;"></h3>
+                <!-- جعبه نمایش جایزه -->
+                <div id="prizeMessage" class="prize-box" style="display: none;">
+                    <h3 id="prizeText" style="font-size: 22px; margin-bottom: 10px;"></h3>
                     <p id="prizeSubtext" style="color: var(--text-muted); font-size: 14px; line-height: 1.8;"></p>
                 </div>
             </div>
@@ -159,6 +202,7 @@
     </footer>
 
     <script>
+        // 🎁 لیست جوایز (۵ تا پوچ، ۵ تا تخفیف)
         const segments = [
             { text: "پوچ", color: "#0b3024", isWin: false },
             { text: "۱۰٪ تخفیف", color: "#ff6b00", isWin: true, code: "KAKOSHA-10" },
@@ -179,13 +223,13 @@
         const prizeSubtext = document.getElementById('prizeSubtext');
 
         let isSpinning = false;
-        let currentRotation = 0;
+        let currentRotation = 0; 
 
+        // ساخت گردونه
         function buildWheel() {
             segments.forEach((segment, index) => {
                 const slice = document.createElement('div');
                 slice.className = `wheel-slice slice-${index}`;
-                slice.style.backgroundColor = segment.color;
                 const textSpan = document.createElement('div');
                 textSpan.className = 'wheel-text-span';
                 textSpan.innerHTML = `<span>${segment.text}</span>`;
@@ -195,12 +239,14 @@
         }
         buildWheel();
 
+        // چرخش
         function spinWheel() {
             if (isSpinning) return;
             isSpinning = true;
             prizeMessage.style.display = 'none';
-            spinBtn.innerText = "...";
+            spinBtn.innerText = "در حال...";
 
+            // انتخاب ایندکس (۶۵٪ شانس پوچ)
             let winIndex;
             if (Math.random() < 0.65) {
                 const emptyIndices = segments.map((s, i) => s.isWin === false ? i : -1).filter(i => i !== -1);
@@ -210,12 +256,14 @@
                 winIndex = winIndices[Math.floor(Math.random() * winIndices.length)];
             }
 
-            const spinDegrees = 360 * 5;
-            const targetAngle = spinDegrees + (360 - (winIndex * 36)) + 18;
+            // محاسبه زاویه
+            const spinDegrees = 360 * 6; // ۶ دور کامل
+            const targetAngle = spinDegrees + (360 - (winIndex * 36)) - 18; // -۱۸ برای قرارگیری در مرکز خونه
 
             currentRotation += targetAngle;
             wheelEl.style.transform = `rotate(${currentRotation}deg)`;
 
+            // پایان چرخش
             setTimeout(() => {
                 isSpinning = false;
                 spinBtn.innerText = "استفاده شده";
@@ -225,6 +273,7 @@
             }, 5000);
         }
 
+        // نمایش جایزه
         function showPrize(prize) {
             prizeMessage.style.display = 'block';
 
@@ -234,28 +283,32 @@
                 prizeSubtext.innerText = "این بار شانس با شما یار نبود. دفعه بعد قطعاً برنده میشید!";
             } else {
                 confetti({
-                    particleCount: 150,
-                    spread: 70,
+                    particleCount: 200,
+                    spread: 90,
                     origin: { y: 0.6 },
                     colors: ['#ff6b00', '#ffffff', '#0a6849']
                 });
 
-                prizeText.innerText = "🎉 تبریک! شما برنده شدید 🎉";
+                prizeText.innerText = "🎉 تبریک! برنده شدید 🎉";
                 prizeText.style.color = "#ff6b00";
-                prizeSubtext.innerHTML = `شما موفق شدید <strong>${prize.text}</strong> بگیرید.<br>
-                کد تخفیف اختصاصی شما: <br>
-                <strong style="font-size: 20px; color: #fff; letter-spacing: 2px; display: inline-block; margin-top: 10px; border: 1px dashed var(--orange); padding: 5px 15px; border-radius: 5px;">${prize.code}</strong><br>
-                <span style="font-size: 12px; margin-top: 10px; display: block;">این کد را به مدیر (${'@JudgeKY'}) ارسال کنید.</span>`;
+                prizeSubtext.innerHTML = `
+                    شما موفق شدید <strong>${prize.text}</strong> برای سفر بعدی بگیرید.<br>
+                    کد تخفیف اختصاصی شما: <br>
+                    <strong style="font-size: 22px; color: #fff; letter-spacing: 2px; display: inline-block; margin: 15px 0; border: 2px dashed var(--orange); padding: 8px 20px; border-radius: 8px; background: rgba(255,107,0,0.1);">${prize.code}</strong><br>
+                    <span style="font-size: 12px; color: #aaa;">این کد را به مدیر (${'@JudgeKY'}) ارسال کنید.</span>
+                `;
             }
         }
 
         spinBtn.addEventListener('click', spinWheel);
 
+        // چک کردن قفل
         window.onload = () => {
             if (localStorage.getItem('hasSpunWheel') === 'true') {
                 spinBtn.style.pointerEvents = 'none';
                 spinBtn.innerText = "قبلاً چرخوندی";
-                spinBtn.style.opacity = '0.5';
+                spinBtn.style.opacity = '0.6';
+                // نمایش نتیجه پوچ یا برنده قبلی (اختیاری)
             }
         };
     </script>
