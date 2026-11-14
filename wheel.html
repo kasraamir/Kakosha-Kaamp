@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>گردونه شانس | کاکوشا</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=4">
+    <!-- لود کردن کتابخانه گردونه و افکت کانفتی (جشن) -->
+    <script src="https://cdn.jsdelivr.net/npm/wheel-of-fortune@1.0.0/dist/wheel.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <!-- هدر سایت -->
+    <header class="site-header">
+        <div class="header-right">
+            <a href="./" class="logo">
+                <img src="logo.png" alt="لوگوی کاکوشا">
+            </a>
+        </div>
+        <nav class="nav-menu">
+            <a href="./">بازگشت به خانه</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-container" style="justify-content: center;">
+            <div class="wheel-container" data-aos="zoom-in">
+                <h1 class="wheel-title">گردونه شانس کاکوشا</h1>
+                <p class="wheel-subtitle">شانستو امتحان کن و تخفیف سفر بعدیت رو بگیر!</p>
+                
+                <!-- محل قرارگیری گردونه -->
+                <div id="wheel" style="margin: 30px auto; position: relative;"></div>
+                
+                <!-- دکمه چرخش -->
+                <button id="spinBtn" class="btn spin-btn">بچرخون!</button>
+
+                <!-- بخش نمایش جایزه -->
+                <div id="prizeMessage" class="prize-message" style="display: none;">
+                    <h3 id="prizeText"></h3>
+                    <p id="prizeSubtext"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© کاکوشا کمپ — تمامی حقوق محفوظ است.</p>
+    </footer>
+
+    <script>
+        // ۱۰ خونه: ۶ تا پوچ، ۴ تا تخفیف
+        const segments = [
+            "پوچ",       // 0
+            "۱۰٪ تخفیف", // 1
+            "پوچ",       // 2
+            "۱۵٪ تخفیف", // 3
+            "پوچ",       // 4
+            "پوچ",       // 5
+            "۵٪ تخفیف",  // 6
+            "پوچ",       // 7
+            "۱۲٪ تخفیف", // 8
+            "پوچ"        // 9
+        ];
+
+        const colors = [
+            "#0b3024", "#ff6b00", "#0b3024", "#0a6849", "#0b3024", 
+            "#0b3024", "#ff6b00", "#0b3024", "#0a6849", "#0b3024"
+        ];
+
+        const wheel = new Wheel({
+            el: document.getElementById('wheel'),
+            items: segments,
+            colors: colors,
+            fontSize: 16,
+            fontColor: "#fff",
+            radius: 150,
+            onSpin: (item) => {
+                document.getElementById('spinBtn').disabled = true;
+                document.getElementById('prizeMessage').style.display = 'none';
+            },
+            onEnd: (item) => {
+                showPrize(item);
+                document.getElementById('spinBtn').disabled = true;
+                document.getElementById('spinBtn').innerText = "استفاده شده";
+                localStorage.setItem('hasSpunWheel', 'true');
+            }
+        });
+
+        document.getElementById('spinBtn').addEventListener('click', () => {
+            // انتخاب تصادفی
+            let randomIndex = Math.floor(Math.random() * segments.length);
+            
+            // بایاس: ۶۵٪ شانس افتادن روی پوچ
+            if(Math.random() < 0.65) { 
+                const emptyIndices = [0, 2, 4, 5, 7, 9];
+                randomIndex = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
+            }
+
+            wheel.spin(randomIndex);
+        });
+
+        function showPrize(prize) {
+            const prizeBox = document.getElementById('prizeMessage');
+            const prizeText = document.getElementById('prizeText');
+            const prizeSubtext = document.getElementById('prizeSubtext');
+            
+            prizeBox.style.display = 'block';
+
+            if (prize === "پوچ") {
+                prizeText.innerText = "ای وای! 😢";
+                prizeText.style.color = "#b9c9bf";
+                prizeSubtext.innerText = "این بار شانس با شما یار نبود. دفعه بعد قطعاً برنده میشید!";
+            } else {
+                confetti({
+                    particleCount: 150,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#ff6b00', '#ffffff', '#0a6849']
+                });
+
+                prizeText.innerText = "🎉 تبریک! شما برنده شدید 🎉";
+                prizeText.style.color = "#ff6b00";
+                prizeSubtext.innerHTML = `شما موفق شدید <strong>${prize}</strong> برای سفر بعدی بگیرید.<br>برای استفاده، این پیام را به مدیر (${'@JudgeKY'}) نشان دهید.`;
+            }
+        }
+
+        // چک کردن قفل بودن در بدو ورود
+        window.onload = () => {
+            if (localStorage.getItem('hasSpunWheel') === 'true') {
+                document.getElementById('spinBtn').disabled = true;
+                document.getElementById('spinBtn').innerText = "شما قبلاً استفاده کرده‌اید";
+                setTimeout(() => {
+                    alert("شما قبلاً از شانس خود برای این کمپ استفاده کرده‌اید. منتظر کمپ‌های بعدی ما باشید! 🌿");
+                }, 500);
+            }
+        };
+    </script>
+</body>
+</html>
