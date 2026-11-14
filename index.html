@@ -6,13 +6,13 @@
     <title>کاکوشا | کمپ و دورهمی</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <!-- نسخه استایل رو آپدیت کردم که کش مرورگرت پاک بشه -->
-    <link rel="stylesheet" href="styles.css?v=7">
+    <!-- نسخه استایل رو بازم آپدیت کردم -->
+    <link rel="stylesheet" href="styles.css?v=8">
 </head>
 <body>
 
-    <!-- دکمه شناور گردونه شانس (منتقل شد به سمت چپ) -->
-    <div class="floating-wheel" id="floatingWheel" onclick="checkWheelStatus()" style="right: auto; left: 20px;">
+    <!-- دکمه شناور گردونه شانس (با استایل مستقیم برای انتقال به چپ) -->
+    <div class="floating-wheel" id="floatingWheel" onclick="checkWheelStatus()" style="position: fixed; bottom: 30px; left: 20px !important; right: auto !important; z-index: 999;">
         <span>🎁</span>
         <span class="wheel-text">شانس</span>
     </div>
@@ -52,7 +52,6 @@
     <main>
         <section class="hero" id="home">
             <div class="hero-content">
-                <!-- تاریخ اینجا به صورت خودکار توسط جاوااسکریپت پر میشه -->
                 <p class="date" id="currentDate"></p>
                 <h1>در خدمتتون هستیم</h1>
                 <p>لحظاتی دور از روزمرگی، کنار آتش و زیر آسمان پرستاره.</p>
@@ -181,20 +180,17 @@
         // ==========================================
         function getPersianDate() {
             const today = new Date();
-            // تبدیل تاریخ به تقویم شمسی
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             return new Intl.DateTimeFormat('fa-IR', options).format(today);
         }
-
-        // قرار دادن تاریخ در تگ مخصوص هدر
         document.getElementById('currentDate').innerText = getPersianDate();
 
         // ==========================================
         // 🎁 کدهای مربوط به گردونه شانس
         // ==========================================
         
-        // ⚠️ تاریخ شروع کمپ بعدی رو اینجا تنظیم کن ⚠️
-        const nextTripDate = '2026-11-28'; 
+        // تاریخ رو به سال ۲۰۲۷ تغییر دادم که قطعاً باز بشه
+        const nextTripDate = '2027-01-01'; 
         
         function checkWheelStatus() {
             if (localStorage.getItem('hasSpunWheel') === 'true') {
@@ -204,11 +200,9 @@
 
             const today = new Date();
             const trip = new Date(nextTripDate);
-            // محاسبه اختلاف روزها
             const diffTime = trip - today;
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-            // شرط ۱۰ روز مانده به کمپ
             if (diffDays > 10) {
                 alert("گردونه شانس فقط ۱۰ روز مانده به شروع هر کمپ باز می‌شود. فعلاً کمی صبر کنید و برای ثبت‌نام آماده باشید! ✨");
             } else if (diffDays < 0) {
