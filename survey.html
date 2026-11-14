@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ثبت نظرسنجی | کاکوشا</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- هدر سایت -->
     <header class="site-header">
         <div class="header-right">
             <a href="./" class="logo">
@@ -41,7 +40,7 @@
 
     <main>
         <section class="page-container">
-            <div class="survey-form-wrapper" data-aos="fade-up">
+            <div class="survey-form-wrapper">
                 <div class="page-title" style="text-align: center; margin-bottom: 30px;">
                     <h2 style="color: var(--orange); font-size: 32px;">ثبت نظرسنجی</h2>
                     <p style="color: var(--text-muted); font-size: 14px; margin-top: 10px;">تجربه خود را با ما به اشتراک بگذارید. (شماره تماس شما محفوظ می‌ماند و نمایش داده نمی‌شود)</p>
@@ -92,12 +91,9 @@
         async function submitSurvey(event) {
             event.preventDefault(); 
             
-            // 🔑 توکن‌های اتصال
-            const botToken = '9113954345:AAE7ow1chj40613u3zr1wgW1k_UZ1W0z_fQ'; // توکن ربات شما
-            const chatId = '8258821743'; // آیدی عددی شما
-            const githubToken = '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'; // توکن گیت‌هاب شما
-            const repoOwner = 'kasraamir'; 
-            const repoName = 'Kakosha-Kaamp'; 
+            const botToken = '9113954345:AAE7ow1chj40613u3zr1wgW1k_UZ1W0z_fQ'; 
+            const chatId = '8258821743';     
+            const githubToken = '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'; 
 
             const phone = document.getElementById('phone').value;
             const fname = document.getElementById('fname').value;
@@ -126,71 +122,60 @@
 ${review}
             `;
 
-            // --- ۱. ارسال به تلگرام ---
             try {
-                const tgResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ chat_id: chatId, text: messageText, parse_mode: 'Markdown' })
                 });
-                if (!tgResponse.ok) {
-                    console.error("Telegram Error:", await tgResponse.json());
-                }
             } catch (e) {
-                console.error("Telegram Fetch Error", e);
+                console.error("Telegram Error", e);
             }
 
-            // --- ۲. ارسال به گیت‌هاب ---
             try {
-                const getFileRes = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/reviews.html`, {
+                const getFileRes = await fetch(`https://api.github.com/repos/kasraamir/Kakosha-Kaamp/contents/reviews.html`, {
                     headers: { 'Authorization': `token ${githubToken}` }
                 });
-                
-                if (!getFileRes.ok) throw new Error("خطا در خواندن فایل از گیت‌هاب");
-                
                 const fileData = await getFileRes.json();
-                const content = decodeURIComponent(escape(atob(fileData.content))); 
-                const fileSha = fileData.sha; 
+                
+                if (fileData.content) {
+                    const content = decodeURIComponent(escape(atob(fileData.content))); 
+                    const fileSha = fileData.sha; 
 
-                const newReviewHTML = `
-                <div class="testimonial-card">
-                    <div class="stars">${starsHTML}</div>
-                    <p class="review-text">"${review}"</p>
-                    <div class="reviewer-info">
-                        <strong>${fname} ${lname}</strong>
-                        <span>تازه ثبت شده</span>
+                    const newReviewHTML = `
+                    <div class="testimonial-card">
+                        <div class="stars">${starsHTML}</div>
+                        <p class="review-text">"${review}"</p>
+                        <div class="reviewer-info">
+                            <strong>${fname} ${lname}</strong>
+                            <span>تازه ثبت شده</span>
+                        </div>
                     </div>
-                </div>
-                <!-- INSERT_POINT -->`;
+                    <!-- INSERT_POINT -->`;
 
-                const updatedContent = content.replace('<!-- INSERT_POINT -->', newReviewHTML);
-                const encodedContent = btoa(unescape(encodeURIComponent(updatedContent)));
+                    const updatedContent = content.replace('<!-- INSERT_POINT -->', newReviewHTML);
+                    const encodedContent = btoa(unescape(encodeURIComponent(updatedContent)));
 
-                const putResponse = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/reviews.html`, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `token ${githubToken}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        message: `New review from ${fname} ${lname}`,
-                        content: encodedContent,
-                        sha: fileSha
-                    })
-                });
-
-                if (!putResponse.ok) throw new Error("خطا در ذخیره فایل در گیت‌هاب");
-
-                // موفقیت‌آمیز بود
-                document.getElementById("surveyForm").style.display = "none";
-                document.getElementById("successMessage").style.display = "block";
-
+                    await fetch(`https://api.github.com/repos/kasraamir/Kakosha-Kaamp/contents/reviews.html`, {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `token ${githubToken}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            message: `New review from ${fname}`,
+                            content: encodedContent,
+                            sha: fileSha
+                        })
+                    });
+                }
             } catch (error) {
-                console.error("GitHub Error:", error);
-                // اگر گیت‌هاب خطا داد، به کاربر ارور نمیدیم، فقط دکمه رو برمی‌گردونیم
-                document.getElementById("surveyForm").style.display = "none";
-                document.getElementById("successMessage").style.display = "block";
+                console.error("GitHub Error", error);
             }
+
+            // نمایش موفقیت به کاربر
+            document.getElementById("surveyForm").style.display = "none";
+            document.getElementById("successMessage").style.display = "block";
         }
     </script>
 </body>
