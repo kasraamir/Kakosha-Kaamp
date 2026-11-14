@@ -6,12 +6,13 @@
     <title>کاکوشا | کمپ و دورهمی</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <link rel="stylesheet" href="styles.css">
+    <!-- نسخه استایل رو آپدیت کردم که کش مرورگرت پاک بشه -->
+    <link rel="stylesheet" href="styles.css?v=6">
 </head>
 <body>
 
-    <!-- دکمه شناور گردونه شانس -->
-    <div class="floating-wheel" id="floatingWheel" onclick="checkWheelStatus()">
+    <!-- دکمه شناور گردونه شانس (منتقل شد به سمت چپ) -->
+    <div class="floating-wheel" id="floatingWheel" onclick="checkWheelStatus()" style="right: auto; left: 20px;">
         <span>🎁</span>
         <span class="wheel-text">شانس</span>
     </div>
@@ -180,15 +181,16 @@
         // ==========================================
         function getPersianDate() {
             const today = new Date();
+            // تبدیل تاریخ به تقویم شمسی
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             return new Intl.DateTimeFormat('fa-IR', options).format(today);
         }
 
-        // قرار دادن تاریخ در تگ مخصوص
+        // قرار دادن تاریخ در تگ مخصوص هدر
         document.getElementById('currentDate').innerText = getPersianDate();
 
         // ==========================================
-        // 🎁 کدهای مربوط به گردونه شانس (با شرط زمانی)
+        // 🎁 کدهای مربوط به گردونه شانس
         // ==========================================
         
         // تاریخ شروع کمپ بعدی (۳۰ مهر ۱۴۰۳)
@@ -202,10 +204,10 @@
 
             const today = new Date();
             const trip = new Date(nextTripDate);
-            // محاسبه اختلاف روزها
             const diffTime = trip - today;
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
+            // شرط ۱۰ روز مانده به کمپ
             if (diffDays > 10) {
                 alert("گردونه شانس فقط ۱۰ روز مانده به شروع هر کمپ باز می‌شود. فعلاً کمی صبر کنید و برای ثبت‌نام آماده باشید! ✨");
             } else if (diffDays < 0) {
