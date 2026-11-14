@@ -6,13 +6,13 @@
     <title>کاکوشا | کمپ و دورهمی</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <!-- نسخه استایل رو بازم آپدیت کردم -->
-    <link rel="stylesheet" href="styles.css?v=8">
+    <!-- نسخه رو بازم تغییر دادم که مرورگرت مجبور بشه کد جدید رو لود کنه -->
+    <link rel="stylesheet" href="styles.css?v=9">
 </head>
 <body>
 
-    <!-- دکمه شناور گردونه شانس (با استایل مستقیم برای انتقال به چپ) -->
-    <div class="floating-wheel" id="floatingWheel" onclick="checkWheelStatus()" style="position: fixed; bottom: 30px; left: 20px !important; right: auto !important; z-index: 999;">
+    <!-- دکمه شناور گردونه شانس (برگشت به سمت راست) -->
+    <div class="floating-wheel" id="floatingWheel" onclick="checkWheelStatus()" style="position: fixed; bottom: 30px; right: 20px !important; left: auto !important; z-index: 999;">
         <span>🎁</span>
         <span class="wheel-text">شانس</span>
     </div>
@@ -175,9 +175,7 @@
         closeBtn.addEventListener("click", function(){ modal.style.display = "none"; });
         modal.addEventListener("click", function(e){ if(e.target === modal) modal.style.display = "none"; });
 
-        // ==========================================
-        // 📅 کدهای مربوط به تاریخ شمسی خودکار
-        // ==========================================
+        // 📅 تاریخ خودکار
         function getPersianDate() {
             const today = new Date();
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -185,12 +183,9 @@
         }
         document.getElementById('currentDate').innerText = getPersianDate();
 
-        // ==========================================
-        // 🎁 کدهای مربوط به گردونه شانس
-        // ==========================================
-        
-        // تاریخ رو به سال ۲۰۲۷ تغییر دادم که قطعاً باز بشه
-        const nextTripDate = '2027-01-01'; 
+        // 🎁 گردونه شانس
+        // ⚠️ تاریخ رو گذاشتم فردا (بر اساس تاریخ گوشیت) که گردونه ۱۰۰٪ باز بشه
+        const nextTripDate = '2026-11-24'; 
         
         function checkWheelStatus() {
             if (localStorage.getItem('hasSpunWheel') === 'true') {
