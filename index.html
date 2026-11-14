@@ -6,8 +6,7 @@
     <title>کاکوشا | کمپ و دورهمی</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <!-- لینک استایل به اسم جدید تغییر کرد -->
-    <link rel="stylesheet" href="styles.css?v=5">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -175,26 +174,21 @@
         closeBtn.addEventListener("click", function(){ modal.style.display = "none"; });
         modal.addEventListener("click", function(e){ if(e.target === modal) modal.style.display = "none"; });
 
-        // ==========================================
         // 🎁 کدهای مربوط به گردونه شانس
-        // ==========================================
-        
-        // تاریخ شروع کمپ بعدی (۳۰ مهر ۱۴۰۳)
-        const nextTripDate = '2024-10-21'; 
+        const nextTripDate = '2024-10-21'; // تاریخ کمپ بعدی (۳۰ مهر)
         
         function checkWheelStatus() {
             if (localStorage.getItem('hasSpunWheel') === 'true') {
                 alert("شما قبلاً از شانس خود برای این کمپ استفاده کرده‌اید. منتظر کمپ‌های بعدی ما باشید! 🌿");
                 return;
             }
-
             const today = new Date();
             const trip = new Date(nextTripDate);
             const diffTime = trip - today;
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
             if (diffDays > 10) {
-                alert("گردونه شانس فقط ۱۰ روز مانده به شروع هر کمپ باز می‌شود. فعلاً کمی صبر کنید و برای ثبت‌نام آماده باشید! ✨");
+                alert("گردونه شانس فقط ۱۰ روز مانده به شروع هر کمپ باز می‌شود. فعلاً کمی صبر کنید! ✨");
             } else if (diffDays < 0) {
                 alert("این کمپ به پایان رسیده است. منتظر گردونه شانس کمپ بعدی باشید! ⛺️");
             } else {
