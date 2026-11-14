@@ -6,6 +6,7 @@
     <title>گردونه شانس | کاکوشا</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <!-- لود کردن کتابخانه گردونه و افکت کانفتی (جشن) -->
     <script src="https://cdn.jsdelivr.net/npm/wheel-of-fortune@1.0.0/dist/wheel.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
@@ -26,19 +27,15 @@
         <section class="page-container" style="justify-content: center;">
             <div class="wheel-container">
                 <h1 class="wheel-title">گردونه شانس کاکوشا</h1>
-                <p class="wheel-subtitle" id="statusText">برای شروع، دکمه زیر را فشار دهید</p>
+                <p class="wheel-subtitle">شانستو امتحان کن و تخفیف سفر بعدیت رو بگیر!</p>
                 
+                <!-- محل قرارگیری گردونه -->
                 <div id="wheel" style="margin: 30px auto; position: relative;"></div>
                 
-                <!-- دکمه‌های کنترل -->
-                <div style="display: flex; flex-direction: column; gap: 15px; align-items: center; margin-top: 20px;">
-                    <!-- دکمه فعال سازی (اول نمایش داده میشه) -->
-                    <button id="enableSensorBtn" class="btn spin-btn" style="width: 100%; max-width: 300px;">📱 فعال‌سازی سنسور حرکت</button>
-                    
-                    <!-- دکمه چرخش دستی (اول مخفیه) -->
-                    <button id="spinBtn" class="btn spin-btn" style="display: none; width: 100%; max-width: 300px;">بچرخون!</button>
-                </div>
+                <!-- دکمه چرخش -->
+                <button id="spinBtn" class="btn spin-btn">بچرخون!</button>
 
+                <!-- بخش نمایش جایزه -->
                 <div id="prizeMessage" class="prize-message" style="display: none;">
                     <h3 id="prizeText"></h3>
                     <p id="prizeSubtext"></p>
@@ -52,9 +49,18 @@
     </footer>
 
     <script>
+        // ۱۰ خونه: ۶ تا پوچ، ۴ تا تخفیف
         const segments = [
-            "پوچ", "۱۰٪ تخفیف", "پوچ", "۱۵٪ تخفیف", "پوچ", 
-            "پوچ", "۵٪ تخفیف", "پوچ", "۱۲٪ تخفیف", "پوچ"
+            "پوچ",       // 0
+            "۱۰٪ تخفیف", // 1
+            "پوچ",       // 2
+            "۱۵٪ تخفیف", // 3
+            "پوچ",       // 4
+            "پوچ",       // 5
+            "۵٪ تخفیف",  // 6
+            "پوچ",       // 7
+            "۱۲٪ تخفیف", // 8
+            "پوچ"        // 9
         ];
 
         const colors = [
@@ -62,10 +68,6 @@
             "#0b3024", "#ff6b00", "#0b3024", "#0a6849", "#0b3024"
         ];
 
-        let isSpinning = false;
-        let sensorEnabled = false;
-
-        // تعریف گردونه
         const wheel = new Wheel({
             el: document.getElementById('wheel'),
             items: segments,
@@ -74,37 +76,29 @@
             fontColor: "#fff",
             radius: 150,
             onSpin: (item) => {
-                isSpinning = true;
                 document.getElementById('spinBtn').disabled = true;
-                document.getElementById('enableSensorBtn').disabled = true;
-                document.getElementById('statusText').innerText = "در حال چرخش...";
+                document.getElementById('prizeMessage').style.display = 'none';
             },
             onEnd: (item) => {
-                isSpinning = false;
                 showPrize(item);
-                document.getElementById('spinBtn').innerText = "استفاده شده";
-                document.getElementById('enableSensorBtn').style.display = 'none';
-                document.getElementById('spinBtn').style.display = 'block';
                 document.getElementById('spinBtn').disabled = true;
+                document.getElementById('spinBtn').innerText = "استفاده شده";
                 localStorage.setItem('hasSpunWheel', 'true');
             }
         });
 
-        // دکمه چرخش دستی
         document.getElementById('spinBtn').addEventListener('click', () => {
-            if (isSpinning) return;
-            spinWheel();
-        });
-
-        function spinWheel() {
+            // انتخاب تصادفی
             let randomIndex = Math.floor(Math.random() * segments.length);
-            // ۶۵ درصد احتمال پوچ
+            
+            // بایاس: ۶۵٪ شانس افتادن روی پوچ
             if(Math.random() < 0.65) { 
                 const emptyIndices = [0, 2, 4, 5, 7, 9];
                 randomIndex = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
             }
+
             wheel.spin(randomIndex);
-        }
+        });
 
         function showPrize(prize) {
             const prizeBox = document.getElementById('prizeMessage');
@@ -112,7 +106,6 @@
             const prizeSubtext = document.getElementById('prizeSubtext');
             
             prizeBox.style.display = 'block';
-            document.getElementById('statusText').innerText = "نتیجه مشخص شد!";
 
             if (prize === "پوچ") {
                 prizeText.innerText = "ای وای! 😢";
@@ -132,78 +125,14 @@
             }
         }
 
-        // ==========================================
-        // 📱 بخش فعال‌سازی سنسور (مهم)
-        // ==========================================
-        
-        document.getElementById('enableSensorBtn').addEventListener('click', async () => {
-            // درخواست اجازه از مرورگر (برای iOS)
-            if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-                try {
-                    const permission = await DeviceOrientationEvent.requestPermission();
-                    if (permission === 'granted') {
-                        startSensorMode();
-                    } else {
-                        alert("شما اجازه دسترسی به سنسور را ندادید. می‌توانید از دکمه چرخش استفاده کنید.");
-                        showManualSpinBtn();
-                    }
-                } catch (error) {
-                    console.error("Sensor error:", error);
-                    showManualSpinBtn();
-                }
-            } else {
-                // برای اندروید
-                startSensorMode();
-            }
-        });
-
-        function startSensorMode() {
-            sensorEnabled = true;
-            document.getElementById('enableSensorBtn').style.display = 'none';
-            document.getElementById('spinBtn').style.display = 'block';
-            document.getElementById('spinBtn').innerText = "یا اینجا کلیک کنید";
-            document.getElementById('spinBtn').style.backgroundColor = "transparent";
-            document.getElementById('spinBtn').style.border = "1px solid var(--orange)";
-            document.getElementById('spinBtn').style.color = "var(--orange)";
-            
-            document.getElementById('statusText').innerText = "📱 حالا گوشی را به چپ و راست کج کنید تا گردونه بچرخد!";
-            
-            // گوش دادن به حرکت گوشی
-            window.addEventListener('deviceorientation', handleOrientation);
-        }
-
-        function showManualSpinBtn() {
-            document.getElementById('enableSensorBtn').style.display = 'none';
-            document.getElementById('spinBtn').style.display = 'block';
-            document.getElementById('spinBtn').innerText = "بچرخون!";
-        }
-
-        let lastShakeTime = 0;
-
-        function handleOrientation(event) {
-            if (!sensorEnabled || isSpinning) return;
-
-            // زاویه کج شدن گوشی به چپ و راست
-            const tilt = event.gamma; 
-            
-            // اگر بیش از ۲۵ درجه کج شد و ۲ ثانیه از چرخش قبلی گذشته بود
-            if (Math.abs(tilt) > 25) {
-                const now = Date.now();
-                if (now - lastShakeTime > 2000) {
-                    lastShakeTime = now;
-                    spinWheel();
-                }
-            }
-        }
-
-        // چک کردن اینکه کاربر قبلا استفاده کرده یا نه
+        // چک کردن قفل بودن در بدو ورود
         window.onload = () => {
             if (localStorage.getItem('hasSpunWheel') === 'true') {
-                document.getElementById('enableSensorBtn').style.display = 'none';
-                document.getElementById('spinBtn').style.display = 'block';
                 document.getElementById('spinBtn').disabled = true;
                 document.getElementById('spinBtn').innerText = "شما قبلاً استفاده کرده‌اید";
-                document.getElementById('statusText').innerText = "شما قبلاً از شانس خود استفاده کرده‌اید.";
+                setTimeout(() => {
+                    alert("شما قبلاً از شانس خود برای این کمپ استفاده کرده‌اید. منتظر کمپ‌های بعدی ما باشید! 🌿");
+                }, 500);
             }
         };
     </script>
