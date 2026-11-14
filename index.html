@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <!-- نسخه استایل رو آپدیت کردم که کش مرورگرت پاک بشه -->
-    <link rel="stylesheet" href="styles.css?v=6">
+    <link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body>
 
@@ -193,8 +193,8 @@
         // 🎁 کدهای مربوط به گردونه شانس
         // ==========================================
         
-        // تاریخ شروع کمپ بعدی (۳۰ مهر ۱۴۰۳)
-        const nextTripDate = '2024-10-21'; 
+        // ⚠️ تاریخ شروع کمپ بعدی رو اینجا تنظیم کن ⚠️
+        const nextTripDate = '2026-11-28'; 
         
         function checkWheelStatus() {
             if (localStorage.getItem('hasSpunWheel') === 'true') {
@@ -204,6 +204,7 @@
 
             const today = new Date();
             const trip = new Date(nextTripDate);
+            // محاسبه اختلاف روزها
             const diffTime = trip - today;
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
