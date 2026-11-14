@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>گردونه شانس | کاکوشا</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=4">
-    <!-- لود کردن کتابخانه گردونه و افکت کانفتی (جشن) -->
+    <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/wheel-of-fortune@1.0.0/dist/wheel.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
-    <!-- هدر سایت -->
     <header class="site-header">
         <div class="header-right">
             <a href="./" class="logo">
@@ -26,17 +24,14 @@
 
     <main>
         <section class="page-container" style="justify-content: center;">
-            <div class="wheel-container" data-aos="zoom-in">
+            <div class="wheel-container">
                 <h1 class="wheel-title">گردونه شانس کاکوشا</h1>
                 <p class="wheel-subtitle">شانستو امتحان کن و تخفیف سفر بعدیت رو بگیر!</p>
                 
-                <!-- محل قرارگیری گردونه -->
                 <div id="wheel" style="margin: 30px auto; position: relative;"></div>
                 
-                <!-- دکمه چرخش -->
                 <button id="spinBtn" class="btn spin-btn">بچرخون!</button>
 
-                <!-- بخش نمایش جایزه -->
                 <div id="prizeMessage" class="prize-message" style="display: none;">
                     <h3 id="prizeText"></h3>
                     <p id="prizeSubtext"></p>
@@ -50,18 +45,9 @@
     </footer>
 
     <script>
-        // ۱۰ خونه: ۶ تا پوچ، ۴ تا تخفیف
         const segments = [
-            "پوچ",       // 0
-            "۱۰٪ تخفیف", // 1
-            "پوچ",       // 2
-            "۱۵٪ تخفیف", // 3
-            "پوچ",       // 4
-            "پوچ",       // 5
-            "۵٪ تخفیف",  // 6
-            "پوچ",       // 7
-            "۱۲٪ تخفیف", // 8
-            "پوچ"        // 9
+            "پوچ", "۱۰٪ تخفیف", "پوچ", "۱۵٪ تخفیف", "پوچ", 
+            "پوچ", "۵٪ تخفیف", "پوچ", "۱۲٪ تخفیف", "پوچ"
         ];
 
         const colors = [
@@ -89,10 +75,9 @@
         });
 
         document.getElementById('spinBtn').addEventListener('click', () => {
-            // انتخاب تصادفی
             let randomIndex = Math.floor(Math.random() * segments.length);
             
-            // بایاس: ۶۵٪ شانس افتادن روی پوچ
+            // بایاس برای اینکه بیشتر پوچ بیاد
             if(Math.random() < 0.65) { 
                 const emptyIndices = [0, 2, 4, 5, 7, 9];
                 randomIndex = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
@@ -126,7 +111,6 @@
             }
         }
 
-        // چک کردن قفل بودن در بدو ورود
         window.onload = () => {
             if (localStorage.getItem('hasSpunWheel') === 'true') {
                 document.getElementById('spinBtn').disabled = true;
