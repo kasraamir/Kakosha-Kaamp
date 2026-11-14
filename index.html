@@ -6,9 +6,15 @@
     <title>کاکوشا | کمپ و دورهمی</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
+
+    <!-- دکمه شناور گردونه شانس -->
+    <div class="floating-wheel" id="floatingWheel" onclick="checkWheelStatus()">
+        <span>🎁</span>
+        <span class="wheel-text">شانس</span>
+    </div>
 
     <!-- هدر سایت -->
     <header class="site-header">
@@ -105,7 +111,6 @@
             </div>
         </section>
 
-        <!-- بخش سوالات متداول (FAQ) -->
         <section class="faq-section">
             <div class="section-header" data-aos="fade-up">
                 <h2>سوالات متداول</h2>
@@ -127,11 +132,6 @@
                     <summary>آیا امکان کنسلی و بازگشت وجه وجود دارد؟</summary>
                     <p>در صورت انصراف تا ۷۲ ساعت قبل از شروع کمپ، ۱۰۰٪ وجه بازگردانده می‌شود. پس از آن، ۵۰٪ مبلغ کسر خواهد شد.</p>
                 </details>
-
-                <details class="faq-item">
-                    <summary>آیا کمپ برای خانواده‌ها و کودکان مناسب است؟</summary>
-                    <p>بله، برنامه‌های ما به گونه‌ای طراحی شده که برای تمامی سنین مناسب باشد. فضایی امن و شاد برای کودکان در نظر گرفته شده است.</p>
-                </details>
             </div>
         </section>
 
@@ -143,9 +143,6 @@
                     <a href="https://t.me/JudgeKY" target="_blank" class="btn">پیام در تلگرام (@JudgeKY)</a>
                     <a href="rules.html" class="btn" style="background-color: var(--dark-green); border: 1px solid var(--orange);">مشاهده قوانین کمپ</a>
                 </div>
-                <p style="font-size: 15px; color: var(--text-muted); margin-top: 15px;">
-                    آیدی تلگرام مدیر جهت هماهنگی: <strong style="color: var(--orange); direction: ltr; display: inline-block; font-size: 17px;">@JudgeKY</strong>
-                </p>
             </div>
         </section>
     </main>
@@ -176,6 +173,34 @@
         });
         closeBtn.addEventListener("click", function(){ modal.style.display = "none"; });
         modal.addEventListener("click", function(e){ if(e.target === modal) modal.style.display = "none"; });
+
+        // ==========================================
+        // 🎁 کدهای مربوط به گردونه شانس
+        // ==========================================
+        
+        // تاریخ شروع کمپ بعدی (۳۰ مهر ۱۴۰۳)
+        const nextTripDate = '2024-10-21'; 
+        
+        function checkWheelStatus() {
+            if (localStorage.getItem('hasSpunWheel') === 'true') {
+                alert("شما قبلاً از شانس خود برای این کمپ استفاده کرده‌اید. منتظر کمپ‌های بعدی ما باشید! 🌿");
+                return;
+            }
+
+            const today = new Date();
+            const trip = new Date(nextTripDate);
+            // محاسبه اختلاف روزها
+            const diffTime = trip - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            if (diffDays > 10) {
+                alert("گردونه شانس فقط ۱۰ روز مانده به شروع هر کمپ باز می‌شود. فعلاً کمی صبر کنید و برای ثبت‌نام آماده باشید! ✨");
+            } else if (diffDays < 0) {
+                alert("این کمپ به پایان رسیده است. منتظر گردونه شانس کمپ بعدی باشید! ⛺️");
+            } else {
+                window.location.href = 'wheel.html';
+            }
+        }
     </script>
 </body>
 </html>
