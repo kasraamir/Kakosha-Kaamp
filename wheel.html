@@ -6,6 +6,7 @@
     <title>گردونه شانس | کاکوشا</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <!-- لود کردن کتابخانه گردونه و افکت کانفتی (جشن) -->
     <script src="https://cdn.jsdelivr.net/npm/wheel-of-fortune@1.0.0/dist/wheel.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
@@ -26,12 +27,18 @@
         <section class="page-container" style="justify-content: center;">
             <div class="wheel-container">
                 <h1 class="wheel-title">گردونه شانس کاکوشا</h1>
-                <p class="wheel-subtitle">شانستو امتحان کن و تخفیف سفر بعدیت رو بگیر!</p>
+                <p class="wheel-subtitle">گوشی رو کج کن تا گردونه بچرخه!</p>
                 
+                <!-- محل قرارگیری گردونه -->
                 <div id="wheel" style="margin: 30px auto; position: relative;"></div>
                 
-                <button id="spinBtn" class="btn spin-btn">بچرخون!</button>
+                <!-- دکمه‌های کنترل -->
+                <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
+                    <button id="enableSensorBtn" class="btn spin-btn" style="background-color: var(--primary);">📱 فعال‌سازی سنسور حرکت</button>
+                    <button id="spinBtn" class="btn spin-btn" style="display: none;">بچرخون!</button>
+                </div>
 
+                <!-- بخش نمایش جایزه -->
                 <div id="prizeMessage" class="prize-message" style="display: none;">
                     <h3 id="prizeText"></h3>
                     <p id="prizeSubtext"></p>
@@ -45,15 +52,27 @@
     </footer>
 
     <script>
+        // ۱۰ خونه: ۶ تا پوچ، ۴ تا تخفیف
         const segments = [
-            "پوچ", "۱۰٪ تخفیف", "پوچ", "۱۵٪ تخفیف", "پوچ", 
-            "پوچ", "۵٪ تخفیف", "پوچ", "۱۲٪ تخفیف", "پوچ"
+            "پوچ",       // 0
+            "۱۰٪ تخفیف", // 1
+            "پوچ",       // 2
+            "۱۵٪ تخفیف", // 3
+            "پوچ",       // 4
+            "پوچ",       // 5
+            "۵٪ تخفیف",  // 6
+            "پوچ",       // 7
+            "۱۲٪ تخفیف", // 8
+            "پوچ"        // 9
         ];
 
         const colors = [
             "#0b3024", "#ff6b00", "#0b3024", "#0a6849", "#0b3024", 
             "#0b3024", "#ff6b00", "#0b3024", "#0a6849", "#0b3024"
         ];
+
+        let isSpinning = false;
+        let sensorEnabled = false;
 
         const wheel = new Wheel({
             el: document.getElementById('wheel'),
@@ -63,28 +82,34 @@
             fontColor: "#fff",
             radius: 150,
             onSpin: (item) => {
+                isSpinning = true;
                 document.getElementById('spinBtn').disabled = true;
-                document.getElementById('prizeMessage').style.display = 'none';
             },
             onEnd: (item) => {
+                isSpinning = false;
                 showPrize(item);
                 document.getElementById('spinBtn').disabled = true;
                 document.getElementById('spinBtn').innerText = "استفاده شده";
+                document.getElementById('enableSensorBtn').style.display = 'none';
                 localStorage.setItem('hasSpunWheel', 'true');
             }
         });
 
+        // چرخش با دکمه (اگر سنسور فعال نباشه)
         document.getElementById('spinBtn').addEventListener('click', () => {
+            if (isSpinning) return;
+            spinWheel();
+        });
+
+        function spinWheel() {
             let randomIndex = Math.floor(Math.random() * segments.length);
-            
-            // بایاس برای اینکه بیشتر پوچ بیاد
+            // بایاس: ۶۵٪ شانس افتادن روی پوچ
             if(Math.random() < 0.65) { 
                 const emptyIndices = [0, 2, 4, 5, 7, 9];
                 randomIndex = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
             }
-
             wheel.spin(randomIndex);
-        });
+        }
 
         function showPrize(prize) {
             const prizeBox = document.getElementById('prizeMessage');
@@ -111,10 +136,71 @@
             }
         }
 
+        // ==========================================
+        // 📱 بخش کدهای مربوط به سنسور حرکت گوشی
+        // ==========================================
+        
+        document.getElementById('enableSensorBtn').addEventListener('click', async () => {
+            if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+                // برای دستگاه‌های iOS (آیفون)
+                try {
+                    const permission = await DeviceOrientationEvent.requestPermission();
+                    if (permission === 'granted') {
+                        enableSensor();
+                    } else {
+                        alert("اجازه دسترسی به سنسور داده نشد. می‌توانید از دکمه بچرخون استفاده کنید.");
+                    }
+                } catch (error) {
+                    console.error(error);
+                    alert("خطا در فعال‌سازی سنسور.");
+                }
+            } else {
+                // برای اندروید و سایر دستگاه‌ها
+                enableSensor();
+            }
+        });
+
+        function enableSensor() {
+            sensorEnabled = true;
+            document.getElementById('enableSensorBtn').style.display = 'none';
+            document.getElementById('spinBtn').style.display = 'block';
+            document.getElementById('spinBtn').innerText = "یا گوشی را کج کنید!";
+            document.getElementById('spinBtn').style.backgroundColor = "var(--dark-green)";
+            document.getElementById('spinBtn').style.border = "1px solid var(--orange)";
+
+            window.addEventListener('deviceorientation', handleOrientation);
+            
+            // اضافه کردن یه متن راهنما
+            document.querySelector('.wheel-subtitle').innerText = "حالا گوشی رو به چپ و راست کج کن تا بچرخه! 📱";
+        }
+
+        let lastShakeTime = 0;
+
+        function handleOrientation(event) {
+            if (!sensorEnabled || isSpinning) return;
+
+            // محاسبه میزان کج شدن گوشی (چپ و راست)
+            // event.gamma زاویه کج شدن به چپ و راست رو میده (بین -90 تا 90)
+            const tilt = event.gamma; 
+            
+            // اگر گوشی بیشتر از ۲۰ درجه کج شد و از آخرین چرخش ۲ ثانیه گذشته بود
+            if (Math.abs(tilt) > 20) {
+                const now = Date.now();
+                if (now - lastShakeTime > 2000) {
+                    lastShakeTime = now;
+                    spinWheel();
+                }
+            }
+        }
+
+        // چک کردن قفل بودن در بدو ورود
         window.onload = () => {
             if (localStorage.getItem('hasSpunWheel') === 'true') {
+                document.getElementById('enableSensorBtn').style.display = 'none';
+                document.getElementById('spinBtn').style.display = 'block';
                 document.getElementById('spinBtn').disabled = true;
                 document.getElementById('spinBtn').innerText = "شما قبلاً استفاده کرده‌اید";
+                
                 setTimeout(() => {
                     alert("شما قبلاً از شانس خود برای این کمپ استفاده کرده‌اید. منتظر کمپ‌های بعدی ما باشید! 🌿");
                 }, 500);
